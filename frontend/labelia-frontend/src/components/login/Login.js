@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axiosClient from '../../api/axiosClient';
 import './Login.css'
 import '../../App.css'
 
 // Créer le composant Login
 function Login(){
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   // Déclaration des états (useSate --> initialise la valeur à une chaîne vide ; set... --> change la valeur)
   const [email, setEmail] = useState('');
@@ -26,6 +27,9 @@ function Login(){
             password: password
         });
         console.log('Réponse reçue', response.data);
+        if (response.status === 200) {
+          navigate('/dashboard');
+        }
 
         if (response.data.success) {
           setMessage('');
