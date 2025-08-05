@@ -21,9 +21,6 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
-@app.get("/")
-async def root():
-    return {"message": "Backend FastAPI fonctionne !"}
 
 @app.post("/login")
 async def login(request: LoginRequest):
