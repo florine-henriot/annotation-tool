@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.top-bar {
+/* .top-bar {
     height: 80px;
     width: 100%;
     border-bottom: 2px solid #E5E7EB;
@@ -15,6 +15,21 @@
     align-items: center;
     padding: 0 40px;
     box-sizing: border-box;
+} */
+
+.top-bar {
+  position: fixed;          /* fixe la barre en haut */
+  top: 0;
+  left: 0;
+  width: 100%;              /* prend toute la largeur */
+  height: 60px;             /* ou la hauteur que tu veux */
+  background-color: #F9F9FB;  /* ou ta couleur de fond */
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;            /* pour qu'elle reste au-dessus du contenu */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
 }
 
 .logo {
@@ -31,14 +46,24 @@
     color: #3B82F6;
 }
 
-.login-page {
+/* .login-page {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+.login-page {
+  min-height: 100vh;              /* au moins la hauteur de l'écran */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;        /* permet à la carte de commencer en haut */
+  padding-top: 100px;
+  padding-bottom: 40px;           /* pour laisser un peu d'air en bas */
+  background-color: #F9F9FB;
 }
 
-.login-card {
+/* .login-card {
     background-color: #FFFFFF;
     border: 2px solid #E5E7EB;
     border-radius: 15px;
@@ -46,6 +71,22 @@
     height: min(90vh, 880px);
     max-width: 100%;
     max-height: calc(100% - 80px);
+    max-height: 80vh;
+    overflow-y: auto;
+    min-height: 560px;
+    padding: 20px;
+    box-sizing: border-box;
+} */
+
+.login-card {
+  width: 80%;
+  max-width: 560px;               /* taille max desktop */
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 15px;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  padding-bottom: 80px;
 }
 
 .login-avatar {
@@ -152,4 +193,38 @@
     font-size: 14px;
     margin-top: 10px;
     text-align: center;
+}
+
+.signup-message {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #6B7280;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.signup-button {
+    width: 250px;
+    height: 50px;
+    margin: 5px auto 0 auto;
+    background-color: #FFFFFF;
+    border: 1px solid #2563EB;
+    border-radius: 10px;
+    color: #2563EB;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    display: block;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.signup-button:hover {
+    background-color: #EFF6FF;
+}
+
+.signup-link {
+    text-decoration: none;
+    display: inline-block;
 }

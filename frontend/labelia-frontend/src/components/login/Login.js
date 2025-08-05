@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axiosClient from '../../api/axiosClient';
 import './Login.css'
 import '../../App.css'
@@ -91,6 +92,10 @@ function Login(){
               SE CONNECTER
             </button>
             {message && <p className='login-message'>{message}</p>}
+            <p className='signup-message'>Pas encore inscrit ?</p>
+            <Link to="/signup" className='signup-link'>
+                <button className='signup-button'>INSCRIVEZ-VOUS</button>
+            </Link>
           </form>
         </div>
       </div>
