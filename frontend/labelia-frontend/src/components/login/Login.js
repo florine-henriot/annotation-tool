@@ -43,8 +43,8 @@ function Login() {
 
         } catch (error) {
             console.error(error);
-            if (error.response?.data?.message) {
-                setMessage(error.response.data.message);
+            if (error.response && error.response.data && error.response.data.detail) {
+                setMessage(error.response.data.detail);
             } else {
                 setMessage('Erreur lors de la connexion.');
             }

@@ -1,14 +1,17 @@
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import status
+from sqlalchemy.orm import Session
 
+from database import SessionLocal, engine
+from models import User, Base
+from schemas import LoginRequest
+from crud import get_user_by_email
 
-from pydantic import BaseModel
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Configuration CORS
+# Configuration CORS pour le frontend local
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # autorise le frontend React
@@ -17,16 +20,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class LoginRequest(BaseModel):
-    email: str
-    password: str
+# Dépendance pour obtenir une sessions DB
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @app.post("/login")
-async def login(request: LoginRequest):
-    if request.email != "test@labelia.com" or request.password != "secret":
-        return JSONResponse(
-            status_code=401,
-            content = {"success": False, "message": "Identifiants incorrects"}
-        )
+def login(request: LoginRequest, db: Session = Depends(get_db)):
+    user = get_user_by_email(db, request.email)
+    if not user or user.password != request.password:
+        raise HTTPException(status_code = 401, detail = "Identifiants incorrects.")
+    
     return {"success": True}
