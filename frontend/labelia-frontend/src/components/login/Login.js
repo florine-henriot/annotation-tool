@@ -60,7 +60,7 @@ function Login() {
                 <span className='site-name'>Labelia</span>
             </div>
 
-            {/* Section principale de la page de connexion */}*
+            {/* Section principale de la page de connexion */}
             <div className='login-page'>
                 <div className='login-card'>
                     <img src='/login_avatar.png' alt='Avatar' className='login-avatar' />
