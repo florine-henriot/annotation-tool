@@ -106,8 +106,8 @@
 }
 
 .login-input {
-    width: 250px;
-    max-width: 80vW;
+    width: 100%;
+    max-width: 250px;
     height: 50px;
     border-radius: 10px;
     background-color: #FFFFFF;
@@ -162,7 +162,8 @@
 
 
 .login-button {
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
     height: 50px;
     background-color: #3B82F6;
     color: #FFFFFF;
@@ -203,8 +204,9 @@
     margin-top: 50px;
 }
 
-.signup-button {
-    width: 250px;
+.signup-redirection {
+    width: 100%;
+    max-width: 250px;
     height: 50px;
     margin: 5px auto 0 auto;
     background-color: #FFFFFF;
@@ -215,16 +217,13 @@
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
-    display: block;
+    display: flex;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    align-items: center;
+    justify-content: center;
 }
 
-.signup-button:hover {
+.signup-redirection:hover {
     background-color: #EFF6FF;
-}
-
-.signup-link {
-    text-decoration: none;
-    display: inline-block;
 }

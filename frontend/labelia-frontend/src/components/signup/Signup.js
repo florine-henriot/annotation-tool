@@ -1,10 +1,13 @@
 import React, { useState} from 'react';
 import axiosClient from '../../api/axiosClient';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 import './Signup.css'
 import '../../App.css'
 
 function Signup() {
+    const navigate = useNavigate();
 
     const [name, setName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -18,29 +21,41 @@ function Signup() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
     const handleSubmit = async(e) => {
         e.preventDefault(); // Empêche le rechargement de la page
+        console.log("Form submitted");
         setError("");
         setSuccess(false);
 
+        if (password !== confirmPassword) {
+            setError("Les mots de passe ne correspondent pas.");
+            return;
+        }
+
         try {
             const response = await axiosClient.post("/signup", {
-                name,
-                lastName,
+                first_name: name,
+                last_name: lastName,
                 company,
                 email,
                 password,
-                confirmPassword
             });
 
             if (response.data.success) {
                 setSuccess(true);
+                // navigate("/login")
+                setShowSuccessPopup(true);
             } else {
                 setError(response.data.message || "Erreur lors de l'inscription.");
             }
         } catch (err) {
-            setError("Erreur lors de l'inscription.");
-            console.error(err)
+            if (err.response && err.response.data.detail) {
+                setError(err.response.data.detail);
+            } else {
+                setError("Erreur lors de l'inscription.");
+            }
         }
     };
 
@@ -63,7 +78,7 @@ function Signup() {
 
                         {/* Champ prénom */}
                         <input
-                        type="name"
+                        type="text"
                         placeholder='Prénom'
                         className='signup-input'
                         value={name}
@@ -73,7 +88,7 @@ function Signup() {
 
                         {/* Champ nom */}
                         <input
-                        type="lastName"
+                        type="text"
                         placeholder='Nom'
                         className='signup-input'
                         value={lastName}
@@ -83,7 +98,7 @@ function Signup() {
 
                         {/* Champ entreprise */}
                         <input
-                        type="company"
+                        type="text"
                         placeholder='Entreprise (facultatif)'
                         className='signup-input'
                         value={company}
@@ -158,9 +173,31 @@ function Signup() {
                             </button>
                         </div>
 
-                        
+                        {/* Bouton de connexion */}
+                        <button type="submit" className="signup-button">
+                            S'INSCRIRE
+                        </button>
 
+                        {/* Redirection vers l'inscription */}
+                        <p className="login-redirection-message">Déjà inscrit ?</p>
+                        <Link to="/login" className='login-redirection'>
+                            CONNECTEZ-VOUS
+                        </Link>
+                        {/* <button className="login-redirection">CONNECTEZ-VOUS</button> */}
                     </form>
+
+                    {error && <p className='error-message'>{error}</p>}
+
+                    {showSuccessPopup && (
+                        <div className='popup-overlay'>
+                            <div className='popup-content'>
+                                <h2>Inscription réussie ! 🎉</h2>
+                                <button onClick={() => navigate("/login")} className='popup-button'>
+                                    CONNECTEZ-VOUS
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
                 </div>
             </div>

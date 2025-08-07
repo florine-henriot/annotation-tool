@@ -117,8 +117,8 @@ function Login() {
                         
                         {/* Redirection vers l'inscription */}
                         <p className="signup-message">Pas encore inscrit ?</p>
-                        <Link to='/signup' className='signup-link'>
-                            <button className="signup-button">INSCRIVEZ-VOUS</button>
+                        <Link to='/signup' className='signup-redirection'>
+                            INSCRIVEZ-VOUS
                         </Link>
                     </form>
                 </div>
