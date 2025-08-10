@@ -147,7 +147,7 @@ function Signup() {
                         {/* Champ confirmation mot de passe avec bouton pour l'afficher/masquer */}
                         <div className='password-container'>
                             <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showConfirmPassword ? 'text' : 'password'}
                             placeholder='Confirmer mot de passe'
                             className='password-input'
                             value={confirmPassword}

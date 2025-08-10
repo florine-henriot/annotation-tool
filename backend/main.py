@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
+from datetime import datetime, timedelta
+
 from database import SessionLocal, engine
 from models import User, Base
 from schemas import LoginRequest, SignupRequest
@@ -10,6 +12,9 @@ from crud import get_user_by_email
 from utils import hashpassword, verify_password
 
 Base.metadata.create_all(bind=engine)
+
+MAX_ATTEMPTS = 5
+LOCK_TIME = timedelta(minutes=60)
 
 app = FastAPI()
 
@@ -34,9 +39,28 @@ def get_db():
 @app.post("/login")
 def login(request: LoginRequest, db: Session = Depends(get_db)):
     user = get_user_by_email(db, request.email)
-    if not user or not verify_password(request.password, user.password):
+    if not user :
         raise HTTPException(status_code = 401, detail = "Identifiants incorrects.")
     
+    # Vérifier si le compte est vérouillé
+    if user.lock_until and datetime.now() < user.lock_until:
+        remaining = int((user.lock_until - datetime.now()).total_seconds() // 60)
+        raise HTTPException(status_code=403, detail = f'Trop de tentatives. Réessayez dans {remaining} minutes.')
+
+    # Vérifier le mot de passe
+    if not verify_password(request.password, user.password):
+        user.failed_attempts += 1
+        if user.failed_attempts >= MAX_ATTEMPTS:
+            user.lock_until = datetime.now() + LOCK_TIME
+            user.failed_attempts = 0 # on remet à 0 pour repartir après le délai
+        db.commit()
+        raise HTTPException(status_code = 401, detail = "Identifiants incorrects.")
+
+    # Connexion réussie : on reset le compteur
+    user.failed_attempts = 0
+    user.lock_until = None
+    db.commit()
+
     return {"success": True}
 
 
