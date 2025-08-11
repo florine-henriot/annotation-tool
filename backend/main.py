@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from fastapi.responses import JSONResponse
 
 from datetime import datetime, timedelta
 
@@ -9,7 +10,8 @@ from database import SessionLocal, engine
 from models import User, Base
 from schemas import LoginRequest, SignupRequest
 from crud import get_user_by_email
-from utils import hashpassword, verify_password
+from utils import hashpassword, verify_password, create_access_token
+from auth import get_current_user
 
 Base.metadata.create_all(bind=engine)
 
@@ -61,7 +63,21 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
     user.lock_until = None
     db.commit()
 
-    return {"success": True}
+    # Création du JWT
+    access_token = create_access_token({"sub": user.email})
+
+    # Réponse avec cookie HTTPOnly
+    response = JSONResponse(content={"success": True})
+    response.set_cookie(
+        key = "access_token",
+        value=access_token,
+        httponly=True,
+        secure=False, # True en prod avec HTTPS
+        samesite="strict",
+        max_age = 1800 # 30 minutes
+    )
+
+    return response
 
 
 @app.post("/signup")
@@ -84,3 +100,7 @@ def signup(request: SignupRequest, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=500, detail = "Erreur lors de la création de l'utilisateur.")
     return {"success": True}
+
+@app.get("/protected")
+def protected_route(current_user: str = Depends(get_current_user)):
+    return {"message": f"Bienvenue {current_user} !"}

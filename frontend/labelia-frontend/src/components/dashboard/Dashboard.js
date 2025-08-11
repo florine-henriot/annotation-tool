@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
 function Dashboard() {
-    return (
-        <div style={{padding: '20px'}}>
-            <h1>Bienvenue sur votre page de Dashboard.</h1>
-            <p>Vous êtes connecté.</p>
-        </div>
-    );
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    fetch("http://localhost:8000/protected", {
+      method: "GET",
+      credentials: "include" // important pour envoyer le cookie
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Non authentifié');
+      return res.json();
+    })
+    .then(data => setMessage(data.message))
+    .catch(err => setMessage(err.message));
+  }, []);
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>{message}</p>
+      {/* Ici tu peux rajouter ta barre de navigation */}
+    </div>
+  );
 }
 
 export default Dashboard;

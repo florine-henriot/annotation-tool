@@ -36,6 +36,12 @@ function Login() {
             });
 
             if (response.status === 200 && response.data.success) {
+                // Login réussi, token en cookie est set
+
+                // Test accès protégé
+                const protectedRes = await axiosClient.get('/protected');
+                console.log("Accès protégé OK:", protectedRes.data);
+                
                 navigate('/dashboard'); // Redirige si la connexion réussit
             } else {
                 setMessage(response.data.message || 'Erreur inconnue.');

@@ -23,6 +23,21 @@ function Signup() {
 
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+    const validatePassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+        return regex.test(password);
+    }
+
+    const handlePasswordChange = (e) => {
+        const pwd = e.target.value;
+        setPassword(pwd);
+        if (!validatePassword(pwd)) {
+            setError("Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule et un caractère spécial.");
+        } else {
+            setError("");
+        }
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault(); // Empêche le rechargement de la page
         console.log("Form submitted");
@@ -31,6 +46,11 @@ function Signup() {
 
         if (password !== confirmPassword) {
             setError("Les mots de passe ne correspondent pas.");
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            setError("Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule et un caractère spécial.");
             return;
         }
 
@@ -51,10 +71,22 @@ function Signup() {
                 setError(response.data.message || "Erreur lors de l'inscription.");
             }
         } catch (err) {
-            if (err.response && err.response.data.detail) {
-                setError(err.response.data.detail);
+            if (err.response) {
+                if (err.response.status === 422) {
+                    // Validation Pydantic a échoué, on affiche le message
+                    const detail = err.response.data.detail;
+                    if (Array.isArray(detail) && detail.length > 0 && detail[0].msg) {
+                        setError(detail[0].msg);
+                    } else {
+                        setError("Erreur de validation du formulaire");
+                    }
+                } else if (err.response.data.detail) {
+                    setError(err.response.data.detail);
+                } else {
+                    setError("Erreur lors de l'inscription.");
+                }
             } else {
-                setError("Erreur lors de l'inscription.");
+                setError("Erreur réseau ou serveur.");
             }
         }
     };
@@ -122,7 +154,7 @@ function Signup() {
                             placeholder='Mot de passe'
                             className='password-input'
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handlePasswordChange}
                             required
                             />
                             <button
