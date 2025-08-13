@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from fastapi.responses import JSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
 
 from datetime import datetime, timedelta
 
@@ -19,6 +21,30 @@ MAX_ATTEMPTS = 5
 LOCK_TIME = timedelta(minutes=60)
 
 app = FastAPI()
+
+# Middleware pour les headers de sécurité
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    response = await call_next(request)
+
+    # Content Security Policy (CSP)
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000; "
+        "style-src 'self' 'unsafe-inline' http://localhost:3000; "
+        "img-src 'self' data:; "
+        "connect-src 'self' http://localhost:3000 http://localhost:8000 ws://localhost:3000; "
+        "font-src 'self' data:; "
+        "frame-src 'self';"
+    )
+
+    # Autres headers de sécurité
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+
+    return response
 
 # Configuration CORS pour le frontend local
 app.add_middleware(
