@@ -1,26 +1,12 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from fastapi.responses import JSONResponse
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import Response
 
-from datetime import datetime, timedelta
-
-from database import SessionLocal, engine
-from models import User, Base
-from schemas import LoginRequest, SignupRequest
-from crud import get_user_by_email
-from utils import hashpassword, verify_password, create_access_token
-from auth import get_current_user
-
+from database import engine
+from models import Base
 from api import auth
+from api import users 
 
 Base.metadata.create_all(bind=engine)
-
-MAX_ATTEMPTS = 5
-LOCK_TIME = timedelta(minutes=60)
 
 app = FastAPI()
 
@@ -58,6 +44,8 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(users.router)
+
 
 
 # @app.post("/signup")

@@ -55,7 +55,7 @@ function Signup() {
         }
 
         try {
-            const response = await axiosClient.post("/signup", {
+            const response = await axiosClient.post("/users/signup", {
                 first_name: name,
                 last_name: lastName,
                 company,
