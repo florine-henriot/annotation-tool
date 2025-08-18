@@ -4,7 +4,7 @@ function Dashboard() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch("http://localhost:8000/protected", {
+    fetch("http://localhost:8000/auth/protected", {
       method: "GET",
       credentials: "include" // important pour envoyer le cookie
     })

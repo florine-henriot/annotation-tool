@@ -30,16 +30,17 @@ function Login() {
         setMessage('');
 
         try {
-            const response = await axiosClient.post('/login', {
+            const response = await axiosClient.post('/auth/login', {
                 email,
                 password
-            });
+            },
+        { withCredentials: true});
 
             if (response.status === 200 && response.data.success) {
                 // Login réussi, token en cookie est set
 
                 // Test accès protégé
-                const protectedRes = await axiosClient.get('/protected');
+                const protectedRes = await axiosClient.get('/auth/protected');
                 console.log("Accès protégé OK:", protectedRes.data);
                 
                 navigate('/dashboard'); // Redirige si la connexion réussit
