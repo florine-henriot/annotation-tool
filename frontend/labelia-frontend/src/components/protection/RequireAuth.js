@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import axiosClient from '../../api/axiosClient';
 import { useNavigate } from 'react-router-dom';
 import './Protection.css';
 
-function ProtectedPage() {
+function ProtectedPage({ children }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const navigate = useNavigate();
@@ -50,10 +50,7 @@ function ProtectedPage() {
   }
 
   return (
-    <div>
-      <h1>Page protégée</h1>
-      <p>Bienvenue sur le dashboard !</p>
-    </div>
+    <>{children}</>
   );
 }
 

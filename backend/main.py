@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import engine
 from models import Base
-from api import auth
-from api import users 
+from api import auth, users, dasboard
 
 Base.metadata.create_all(bind=engine)
 
@@ -45,30 +44,4 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(users.router)
-
-
-
-# @app.post("/signup")
-# def signup(request: SignupRequest, db: Session = Depends(get_db)):
-#     user = get_user_by_email(db, request.email)
-#     if user:
-#         raise HTTPException(status_code=400, detail = "Un utilisateur avec cet email existe déjà.")
-    
-#     new_user = User(
-#         first_name = request.first_name,
-#         last_name = request.last_name,
-#         email = request.email,
-#         password = hashpassword(request.password),
-#         company = request.company
-#     )
-#     db.add(new_user)
-#     try:
-#         db.commit()
-#     except IntegrityError:
-#         db.rollback()
-#         raise HTTPException(status_code=500, detail = "Erreur lors de la création de l'utilisateur.")
-#     return {"success": True}
-
-# @app.get("/protected")
-# def protected_route(current_user: str = Depends(get_current_user)):
-#     return {"message": f"Bienvenue {current_user} !"}
+app.include_router(dasboard.router)

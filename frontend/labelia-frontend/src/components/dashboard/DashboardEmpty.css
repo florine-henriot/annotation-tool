@@ -1,0 +1,18 @@
+.dashboard-container {
+    height: 100vh;
+    width: 100%;
+    background-color: #F9F9FB;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-page {
+  min-height: 100vh;              /* au moins la hauteur de l'écran */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;        /* permet à la carte de commencer en haut */
+  padding-top: 40px;
+  padding-bottom: 40px;           /* pour laisser un peu d'air en bas */
+  background-color: #F9F9FB;
+}

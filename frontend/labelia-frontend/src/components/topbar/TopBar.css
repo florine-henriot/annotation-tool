@@ -1,0 +1,52 @@
+.topbar-container {
+  top: 0;
+  left: 0;
+  width: 100%;              /* prend toute la largeur */
+  height: 60px;             /* ou la hauteur que tu veux */
+  background-color: #F9F9FB;  /* ou ta couleur de fond */
+  border-bottom: 2px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  width: 200px; /* fixe la taille demandée */
+}
+
+.topbar-logo {
+    width: 50px;
+    height: 50px;
+    transform: rotate(15deg);
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.topbar-site-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #3B82F6;
+    font-family: 'Roboto', sans-serif;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-color-bar {
+  width: 2px; /* largeur de la petite barre à droite */
+  height: 60px;
+  background-color: #E5E7EB; /* couleur demandée */
+  margin-right: 10px;
+}
+
+.topbar-page-title {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 20px;
+}

@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/login/Login';
 import Signup from './components/signup/Signup';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './pages/DashboardPage';
 import ProtectedPage from './components/protection/RequireAuth';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return(
@@ -13,7 +14,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={
           <ProtectedPage>
-            <Dashboard />
+            <DashboardPage />
           </ProtectedPage>
         } />
       </Routes>
