@@ -63,14 +63,14 @@ function Login() {
 
             {/* --- Barre de navigation supérieure --- */}
             <div className='top-bar'>
-                <img src='/logo.png' alt='Logo' className='logo' />
+                <img src='avatar/logo.png' alt='Logo' className='logo' />
                 <span className='site-name'>Labelia</span>
             </div>
 
             {/* Section principale de la page de connexion */}
             <div className='login-page'>
                 <div className='login-card'>
-                    <img src='/login_avatar.png' alt='Avatar' className='login-avatar' />
+                    <img src='avatar/login_avatar.png' alt='Avatar' className='login-avatar' />
                     <h2 className='login-title'>CONNEXION</h2>
 
                     <form onSubmit={handleSubmit} className='login-form'>

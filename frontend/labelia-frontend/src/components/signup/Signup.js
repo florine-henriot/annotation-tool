@@ -96,14 +96,14 @@ function Signup() {
 
             {/* --- Barre de navigation supérieure --- */}
             <div className='top-bar'>
-                <img src='/logo.png' alt='Logo' className='logo' />
+                <img src='avatar/logo.png' alt='Logo' className='logo' />
                 <span className='site-name'>Labelia</span>
             </div>
 
             {/* Section principale de la page de connexion */}
             <div className='signup-page'>
                 <div className='signup-card'>
-                    <img src='/signup_avatar.png' alt='Avatar' className='signup-avatar' />
+                    <img src='avatar/signup_avatar.png' alt='Avatar' className='signup-avatar' />
                     <h2 className='login-title'>INSCRIPTION</h2>
 
                     <form onSubmit={handleSubmit} className='signup-form'>
