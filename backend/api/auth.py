@@ -17,7 +17,11 @@ router = APIRouter(
 
 @router.get("/protected")
 def protected_route(current_user: str = Depends(get_current_user)):
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Non autorisé")
     return {"message": f"Bienvenue {current_user} !"}
+
+
 
 @router.post("/login")
 def login(request: LoginRequest, db: Session = Depends(get_db)):
