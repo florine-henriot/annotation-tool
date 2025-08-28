@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../topbar/TopBar'
+import SideBar from '../sidebar/Sidebar';
 import './DashboardEmpty.css';
 
 function DashboardEmpty() {
@@ -10,7 +11,7 @@ function DashboardEmpty() {
     return (
         <div className='dashboard-container'>
             <TopBar pageTitle="Tableau de bord" />
-
+            <SideBar />
             <div className='dashboard-page'>
                 Contenu
             </div>

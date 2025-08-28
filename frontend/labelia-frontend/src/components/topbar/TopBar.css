@@ -7,14 +7,14 @@
   border-bottom: 2px solid #E5E7EB;
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  
+  padding-left: 20px;
+  position: fixed;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  width: 200px; /* fixe la taille demandée */
+  min-width: 200px; /* fixe la taille demandée */
 }
 
 .topbar-logo {

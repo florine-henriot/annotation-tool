@@ -8,3 +8,8 @@ body, html, #root {
   min-height: 100vh;
   margin: 0;
 }
+
+:root {
+  --sidebar-width: 200px;
+  --topbar-height: 60px;
+}

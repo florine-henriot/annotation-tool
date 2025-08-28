@@ -1,7 +1,11 @@
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
-from fastapi import Cookie, HTTPException
+from fastapi import Cookie, HTTPException, Depends
+from database import get_db
+from models import User
+from sqlalchemy.orm import Session
+from crud import get_user_by_email
 
 from core.config import settings
 
@@ -19,7 +23,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
-def get_current_user(access_token: str = Cookie(None)):
+def get_current_user(db: Session = Depends(get_db), access_token: str = Cookie(None)) -> User:
     if not access_token:
         raise HTTPException(status_code=401, detail="Non authentifié")
     try:
@@ -27,6 +31,9 @@ def get_current_user(access_token: str = Cookie(None)):
         email: str = payload.get("sub")
         if email is None:
             raise HTTPException(status_code=401, detail="Token invalide")
-        return email
+        user = get_user_by_email(db, email)
+        if user is None:
+            raise HTTPException(status_code = 401, detail = "Utilisateur introuvable")
+        return user
     except JWTError:
         raise HTTPException(status_code=401, detail="Token invalide ou expiré")
