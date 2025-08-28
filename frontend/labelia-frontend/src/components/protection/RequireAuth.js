@@ -37,9 +37,9 @@ function ProtectedPage({ children }) {
         {/* Section principale pour renvoyer à la page de connexion */}
         <div className='protection-page'>
           <div className='protection-card'>
-            <h2 className='protection-title'>Accès refusé</h2>
+            <h2 className='protection-title'>DÉCONNECTÉ</h2>
 
-            <p className='protection-p'>Vous devez être connecté pour accéder à votre dashboard.</p>
+            <p className='protection-p'>Vous devez être connecté pour accéder à votre espace.</p>
 
             <button className='login-button' onClick={() => navigate('/login')}>PAGE DE CONNEXION</button>
           </div>

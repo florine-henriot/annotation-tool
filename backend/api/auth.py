@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from datetime import datetime
@@ -63,3 +63,8 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
     )
 
     return response
+
+@router.post("/logout")
+def logout(response: Response):
+    response.delete_cookie(key="access_token", path="/")
+    return {"success": True, "message": "Vous avez été déconnecté"}

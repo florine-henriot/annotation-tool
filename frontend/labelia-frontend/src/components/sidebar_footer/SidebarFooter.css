@@ -1,0 +1,98 @@
+.sidebar-footer {
+    position: fixed;
+    width: 200px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid #E5E7EB;
+    background-color: #F9F9FB;
+}
+
+.sidebar-btn {
+  background-color: #F9F9FB;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-btn-container {
+  position: relative; /* obligatoire pour que tooltip se positionne par rapport au bouton */
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-btn-container:hover .tooltip {
+  opacity: 1; /* apparaît au hover */
+}
+
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: 110%; /* un peu à droite du bouton */
+  transform: translateY(-50%);
+  background-color: black;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.sidebar-btn:hover {
+  background-color: #F2EEEE;
+}
+
+.account-btn {
+  width: 150px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #333;
+  font-size: 12px;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5); /* fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+    position: relative;
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.popup-text {
+    display: block;
+    margin-top: 1rem;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer; /* change la souris au survol */
+  width: 20px;
+  height: 20px;
+}

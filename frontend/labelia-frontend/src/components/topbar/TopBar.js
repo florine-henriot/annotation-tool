@@ -11,10 +11,12 @@ function TopBar({ pageTitle }) {
             </div>
 
             {/* Partie droite : barre colorée + titre de la page */}
-            <div className='topbar-right'>
+            <div className='topbar-middle'>
                 <div className='topbar-color-bar'></div>
                 <span className='topbar-page-title'>{pageTitle}</span>
             </div>
+
+
         </div>
     )
 }
