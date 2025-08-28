@@ -1,18 +1,58 @@
 .dashboard-container {
-    height: 100vh;
-    width: 100%;
-    background-color: #F9F9FB;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
+  display: grid;
+  grid-template-columns: 200px 1fr; /* 200px pour la sidebar, 1fr pour le reste */
+  grid-template-rows: 60px 1fr;     /* 60px pour la topbar, 1fr pour le contenu */
+  height: 100vh;
+  width: 100%;
+  background-color: #F9F9FB;
 }
 
 .dashboard-page {
-  min-height: 100vh;              /* au moins la hauteur de l'écran */
+  grid-column: 2 / 3;   /* deuxième colonne (zone principale, à droite de la sidebar) */
+  grid-row: 2 / 3;      /* deuxième ligne (sous la topbar) */
   display: flex;
-  justify-content: center;
-  align-items: flex-start;        /* permet à la carte de commencer en haut */
-  padding-top: 40px;
-  padding-bottom: 40px;           /* pour laisser un peu d'air en bas */
-  background-color: #F9F9FB;
+  justify-content: center; /* centre horizontalement la carte */
+  align-items: flex-start; /* commence en haut */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.dashboard-empty-card {
+  width: 90%;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 15px;
+  text-align: justify;
+  padding-left: 20px;
+}
+
+.project-title {
+    font-size: 18px;
+    color: #3B82F6;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+.add-project-btn {
+    width: 200px;
+    height: 40px;
+    background-color: #F2EEEE;
+    border: none;
+    border-radius: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-project-btn:hover {
+    background-color: #ece7e7; /* gris intermédiaire */
 }
