@@ -30,7 +30,7 @@ function ProtectedPage({ children }) {
 
         {/* --- Barre de navigation supérieure --- */}
         <div className='top-bar'>
-          <img src='avatar/logo.png' alt='Logo' className='logo' />
+          <img src='/avatar/logo.png' alt='Logo' className='logo' />
           <span className='site-name'>Labelia</span>
         </div>
 

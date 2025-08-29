@@ -6,7 +6,7 @@ function TopBar({ pageTitle }) {
         <div className='topbar-container'>
             {/* Partie gauche : logo + titre */}
             <div className='topbar-left'>
-                <img src='avatar/logo.png' alt='Logo' className='topbar-logo' />
+                <img src='/avatar/logo.png' alt='Logo' className='topbar-logo' />
                 <span className='topbar-site-name'>Labelia</span>
             </div>
 

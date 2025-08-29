@@ -20,7 +20,7 @@ function DashboardEmpty() {
                     <h2 className='project-title'>
                         PAS ENCORE DE PROJET
                     </h2>
-                    <button className='add-project-btn' onClick={() => navigate("/create-project")}>
+                    <button className='add-project-btn' onClick={() => navigate("/annotations/create")}>
                         <FilePlus size={18} style={{marginRight: "8px"}}/>
                         CRÉER UN PROJET
                     </button>

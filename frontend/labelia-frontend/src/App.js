@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/login/Login';
 import Signup from './components/signup/Signup';
-import Dashboard from './pages/DashboardPage';
 import ProtectedPage from './components/protection/RequireAuth';
 import DashboardPage from './pages/DashboardPage';
+import AnnotationsCreate from './components/annotations/AnnotationsCreate';
+import TestTipTap from './components/TestTipTap';
 
 function App() {
   return(
@@ -17,6 +18,13 @@ function App() {
             <DashboardPage />
           </ProtectedPage>
         } />
+
+        <Route path="/annotations/create" element={
+          <ProtectedPage>
+            <AnnotationsCreate />
+          </ProtectedPage>
+        } />
+        <Route path="/test" element={<TestTipTap/>}/>
       </Routes>
     </Router>
   );

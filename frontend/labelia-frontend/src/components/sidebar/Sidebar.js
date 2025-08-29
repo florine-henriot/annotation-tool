@@ -27,13 +27,13 @@ function SideBar() {
                     <PieChart size={18} style={{marginRight:"10px"}} />
                     Tableau de bord
                 </NavLink>
-                <NavLink to="/projects" className={({ isActive }) => isActive ? "nav-button active": "nav-button"}>
+                <NavLink to="/annotations" className={({ isActive }) => isActive ? "nav-button active": "nav-button"}>
                     <NotebookPen size={18} style={{marginRight:"10px"}} />
                     Annotations
                 </NavLink>
                 {projects.length === 0 && (
                     <button className='nav-button add-project'
-                    onClick={() => navigate("/create-project")}
+                    onClick={() => navigate("/annotations/create")}
                     >
                         <FilePlus size={18} style={{marginRight: "8px"}} />
                         Ajouter 

@@ -1,0 +1,137 @@
+.annotations-create-container {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* 200px pour la sidebar, 1fr pour le reste */
+  grid-template-rows: 60px 1fr;     /* 60px pour la topbar, 1fr pour le contenu */
+  height: 100vh;
+  width: 100%;
+  background-color: #F9F9FB;
+  font-family: 'Roboto', sans-serif;
+}
+
+.annotations-create-page {
+  grid-column: 2 / 3;   /* deuxième colonne (zone principale, à droite de la sidebar) */
+  grid-row: 2 / 3;      /* deuxième ligne (sous la topbar) */
+  display: flex;
+  justify-content: center; /* centre horizontalement la carte */
+  align-items: flex-start; /* commence en haut */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.annotations-create-card {
+  width: 90%;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 15px;
+  text-align: center;
+  padding-left: 20px;
+}
+
+.annotations-create-title {
+    font-size: 26px;
+    color: #3B82F6;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.section-title {
+  font-size: 18px;            /* taille visible mais pas trop grande */
+  font-weight: 600;           /* légèrement gras pour marquer la hiérarchie */
+  color: #1F2937;             /* gris foncé, lisible */
+  margin-bottom: 12px;        /* espace entre le titre et le contenu de la section */
+  margin-top: 20px;
+  padding-bottom: 8px;        /* espace entre le texte et la ligne */
+  text-transform: uppercase;  /* optionnel, pour accentuer le style */
+  letter-spacing: 0.5px;      /* léger espacement entre les lettres */
+  text-align: center;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50%;                  /* largeur de la barre sous le texte */
+  height: 2px;                 /* épaisseur réduite */
+  background-color: #E5E7EB;   /* couleur de la barre */
+  margin: 8px auto 0;          /* centrer horizontalement et espacer du texte */
+  border-radius: 1px;          /* coins légèrement arrondis */
+}
+
+.annotations-create-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.annotations-create-input {
+    width: 100%;
+    max-width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    padding: 0 15px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.annotations-create-input:focus {
+    border-color: #3B82F6
+}
+
+.file-upload-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #F2EEEE;  /* même couleur que tes boutons add-project */
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+}
+
+.file-upload-btn:hover {
+  background-color: #E8E6E6; /* gris légèrement plus foncé au hover */
+}
+
+.file-name {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.create-button {
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 30px auto 0;
+    display: block;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.create-button:hover {
+    background-color: #2563EB;
+}
