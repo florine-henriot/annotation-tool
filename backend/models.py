@@ -1,6 +1,6 @@
 # Définir les modèles pour SQLAlchemy
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Date, TIMESTAMP
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -23,5 +23,12 @@ class Project(Base):
 
     id = Column(Integer, primary_key=True, index=True) # Colonne clé primaire (identifiant unique) et création d'index pour accélérer les recherches sur cette colonne
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE")) # ForeignKey : relie cette colonne à la colonne id de la table users, supprime automatiquement les projets si l'utilisateur est supprimé
+    project_name = Column(Text, nullable=False)
+    due_date = Column(Date, nullable=False)
+    annotation_file_path = Column(Text, nullable = False)
+    guidelines_file_path = Column(Text, nullable = False)
+    notes = Column(Text, nullable = True)
+    created_at = Column(TIMESTAMP, server_default = "CURRENT_TIMESTAMP")
+    status = Column(String, default="pending")
 
     user = relationship("User", back_populates="projects") # Crée une relation ORM entre le projet et l'utilisateur

@@ -5,11 +5,16 @@ import SidebarFooter from '../sidebar_footer/SidebarFooter';
 import './AnnotationsCreate.css'
 import RichTextEditor from '../../text_editor/RichTextEditor';
 import { FilePlus } from 'lucide-react';
+import axiosClient from '../../api/axiosClient';
+import { CircleX } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 function AnnotationsCreate() {
     const [annotationFile, setAnnotationFile] = useState(null);
     const [guidelinesFile, setGuidelinesFile] = useState(null);
     const [notes, setNotes] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
     const handleAnnotationFileChange = (e) => {
         setAnnotationFile(e.target.files[0]);
@@ -18,6 +23,38 @@ function AnnotationsCreate() {
     const handleGuidelinesFileChange = (e) => {
         setGuidelinesFile(e.target.files[0]);
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // empeche le refresh de la page
+
+        // Construire le FormData pour envoyer les fichiers et les nots
+        const formData = new FormData();
+        formData.append("project_name", e.target.project_name.value);
+        formData.append("due_date", e.target.due_date.value);
+        formData.append("annotation_file", annotationFile);
+        if (guidelinesFile) formData.append("guidelines_file", guidelinesFile);
+        formData.append("notes", notes)
+
+        try {
+            const response = await axiosClient.post("/annotations/create", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            console.log("Projet crée :", response.data);
+            setShowPopup(true);
+            setTimeout(() => {
+                navigate("/dashboard")
+            }, 3000);
+        } catch (err) {
+            console.error(err.response?.data || err.message);
+        }
+    }
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+        navigate("/dashboard")
+    }
 
     return (
         <div className='annotations-create-container'>
@@ -28,7 +65,7 @@ function AnnotationsCreate() {
                 <div className='annotations-create-card'>
                     <h2 className='annotations-create-title'>CRÉER UN NOUVEAU PROJET D'ANNOTATIONS</h2>
 
-                    <form className='annotations-create-form'>
+                    <form className='annotations-create-form' onSubmit={handleSubmit}>
 
                         {/* Section d'informations générales sur le projet */}
                         <h2 className='section-title'>INFORMATIONS GÉNÉRALES</h2>
@@ -65,6 +102,7 @@ function AnnotationsCreate() {
                             Fichier à annoter (CSV)
                             <input
                             type="file"
+                            name="annotation_file"
                             accept=".csv"
                             onChange={handleAnnotationFileChange}
                             hidden
@@ -78,6 +116,7 @@ function AnnotationsCreate() {
                             Guidelines d'annotations (facultatif) (PDF)
                             <input
                             type="file"
+                            name="guidelines_file"
                             accept=".pdf"
                             onChange={handleGuidelinesFileChange}
                             hidden />
@@ -91,12 +130,21 @@ function AnnotationsCreate() {
                         <RichTextEditor value={notes} onChange={setNotes} />
 
                         <button type="submit" className='create-button'>
-                            CREER
+                            CRÉER
                         </button>
 
                     </form>
 
                 </div>
+
+                {showPopup && (
+                <div className="popup-overlay">
+                    <div className='popup-content'>
+                        <CircleX className="close-icon" onClick={handleClosePopup} />
+                        <span>Projet créé avec succès ! 🎉</span>
+                    </div>
+                </div>
+                )}
             </div>
         </div>
     )

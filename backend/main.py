@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import engine
 from models import Base
-from api import auth, users, dasboard
+from api import auth, users, dasboard, annotations
 
 Base.metadata.create_all(bind=engine)
 
@@ -45,3 +45,4 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(dasboard.router)
+app.include_router(annotations.router)
