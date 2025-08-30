@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axiosClient from "../../api/axiosClient"
-import { PieChart, NotebookPen, Users, Download, FilePlus } from 'lucide-react';
+import { PieChart, NotebookPen, Users, Download, FilePlus, File } from 'lucide-react';
 import './Sidebar.css'
 
 function SideBar() {
@@ -31,14 +31,24 @@ function SideBar() {
                     <NotebookPen size={18} style={{marginRight:"10px"}} />
                     Annotations
                 </NavLink>
-                {projects.length === 0 && (
-                    <button className='nav-button add-project'
-                    onClick={() => navigate("/annotations/create")}
-                    >
-                        <FilePlus size={18} style={{marginRight: "8px"}} />
-                        Ajouter 
+
+                {/* Boutons pour chaque projet */}
+                {projects.length > 0 && projects.map(project => (
+                    <button 
+                    key={project.id}
+                    className='nav-button add-project'
+                    onClick={() => navigate(`/annotations/${project.id}`)}>
+                        <File size={18} style={{marginRight: "8px"}} />
+                        {project.project_name}
                     </button>
-                )}
+                ))}
+
+                <button className='nav-button add-project'
+                onClick={() => navigate("/annotations/create")}
+                >
+                    <FilePlus size={18} style={{marginRight: "8px"}} />
+                    Ajouter 
+                </button>
                 <NavLink to="/team" className={({ isActive }) => isActive ? "nav-button active": "nav-button"}>
                     <Users size={18} style={{marginRight:"10px"}} />
                     Mon équipe

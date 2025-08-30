@@ -6,7 +6,7 @@ import SideBar from '../sidebar/Sidebar';
 import SidebarFooter from '../sidebar_footer/SidebarFooter';
 import './DashboardEmpty.css';
 
-function DashboardEmpty() {
+function DashboardNotEmpty() {
 
     const navigate = useNavigate();
 
@@ -16,19 +16,11 @@ function DashboardEmpty() {
             <SideBar />
             <SidebarFooter />
             <div className='dashboard-page'>
-                <div className='dashboard-empty-card'>
-                    <h2 className='project-title'>
-                        NOUVEAU PROJET
-                    </h2>
-                    <button className='add-project-btn' onClick={() => navigate("/annotations/create")}>
-                        <FilePlus size={18} style={{marginRight: "8px"}}/>
-                        CRÉER UN PROJET
-                    </button>
-                </div>
+                
             </div>
 
         </div>
     )
 }
 
-export default DashboardEmpty;
+export default DashboardNotEmpty;

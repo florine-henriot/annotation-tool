@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../api/axiosClient';
 import DashboardEmpty from '../components/dashboard/DashboardEmpty';
+import DashboardNotEmpty from '../components/dashboard/DashboardNotEmpty';
 
 function DashboardPage() {
     const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ function DashboardPage() {
     if (loading) return <p>Chargement...</p>;
 
     if (!hasProjects) return <DashboardEmpty />
+    if (hasProjects) return <DashboardNotEmpty />
 }
 
 export default DashboardPage;
