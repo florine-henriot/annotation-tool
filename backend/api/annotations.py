@@ -21,6 +21,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 async def create_project(
     project_name: str = Form(...),
     due_date: str = Form(...),
+    categories: str = Form(...),
     notes: str = Form(None),
     annotation_file: UploadFile = File(...),
     guidelines_file: UploadFile = File(None),
@@ -44,6 +45,8 @@ async def create_project(
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d").date()
     except ValueError:
         raise HTTPException(status_code=400, detail="Format de date invalide")
+    
+    category_list = [c.strip() for c in categories.split(',')] if categories else []
 
     # Création du projet
     new_project = Project(
@@ -53,7 +56,8 @@ async def create_project(
         notes=notes,
         annotation_file_path=annotation_file_path,
         guidelines_file_path=guidelines_file_path,
-        status="pending"
+        status="pending",
+        categories = category_list
     )
 
     db.add(new_project)

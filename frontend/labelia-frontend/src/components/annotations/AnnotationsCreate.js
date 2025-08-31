@@ -33,7 +33,8 @@ function AnnotationsCreate() {
         formData.append("due_date", e.target.due_date.value);
         formData.append("annotation_file", annotationFile);
         if (guidelinesFile) formData.append("guidelines_file", guidelinesFile);
-        formData.append("notes", notes)
+        formData.append("notes", notes);
+        formData.append("categories", e.target.categories.value)
 
         try {
             const response = await axiosClient.post("/annotations/create", formData, {
@@ -93,6 +94,12 @@ function AnnotationsCreate() {
                             }
                         }}
                         />
+
+                        <input className='annotations-create-input'
+                        type='text'
+                        placeholder='Entrez les catégories séparées par des virgules'
+                        name="categories"
+                        required />
 
                         {/* Section pour insérer les fichiers */}
                         <h2 className='section-title'>FICHIERS</h2>

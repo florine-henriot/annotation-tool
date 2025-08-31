@@ -1,6 +1,6 @@
 # Définir les modèles pour SQLAlchemy
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Date, TIMESTAMP
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Date, TIMESTAMP, JSON
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -30,6 +30,7 @@ class Project(Base):
     notes = Column(Text, nullable = True)
     created_at = Column(TIMESTAMP, server_default = "CURRENT_TIMESTAMP")
     status = Column(String, default="pending")
+    categories = Column(JSON, nullable=False)
 
     user = relationship("User", back_populates="projects") # Crée une relation ORM entre le projet et l'utilisateur
     annotations = relationship("Annotation", back_populates="project", cascade="all, delete-orphan")
