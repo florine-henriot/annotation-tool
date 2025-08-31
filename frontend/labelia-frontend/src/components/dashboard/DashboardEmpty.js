@@ -16,9 +16,9 @@ function DashboardEmpty() {
             <SideBar />
             <SidebarFooter />
             <div className='dashboard-page'>
-                <div className='dashboard-empty-card'>
+                <div className='dashboard-card'>
                     <h2 className='project-title'>
-                        NOUVEAU PROJET
+                        PAS ENCORE DE PROJETS D'ANNOTATIONS...
                     </h2>
                     <button className='add-project-btn' onClick={() => navigate("/annotations/create")}>
                         <FilePlus size={18} style={{marginRight: "8px"}}/>
