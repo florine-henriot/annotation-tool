@@ -3,8 +3,9 @@ from sqlalchemy.orm import Session
 from core.security import get_current_user
 from database import get_db
 from crud import get_projects_by_user
-from models import User, Project
+from models import User, Project, Annotation
 import os
+from sqlalchemy import func
 
 router = APIRouter(
     prefix="/dashboard",
@@ -16,7 +17,30 @@ def get_user_projects(current_user : User = Depends(get_current_user), db: Sessi
     projects = get_projects_by_user(db, current_user.id)
     if not projects:
         return {"has_projects": False, "projects": []}
-    return {"has_projects": True, "projects": projects}
+    
+    project_list = []
+    for project in projects:
+        total_rows = db.query(func.count(Annotation.id)).filter(Annotation.project_id == project.id).scalar()
+        annotated_rows = db.query(func.count(Annotation.id)).filter(
+            Annotation.project_id == project.id,
+            Annotation.content.isnot(None)
+        ).scalar()
+
+        completion = 0
+        if total_rows > 0:
+            completion = round((annotated_rows / total_rows) * 100)
+
+        project_list.append({
+            "id": project.id,
+            "project_name": project.project_name,
+            "due_date": project.due_date,
+            "status": project.status,
+            "completion": completion
+        })
+
+    return {"has_projects": True, "projects": project_list}
+
+
 
 
 @router.delete("/annotations/{project_id}")
