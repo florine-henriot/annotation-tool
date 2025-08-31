@@ -32,3 +32,15 @@ class Project(Base):
     status = Column(String, default="pending")
 
     user = relationship("User", back_populates="projects") # Crée une relation ORM entre le projet et l'utilisateur
+    annotations = relationship("Annotation", back_populates="project", cascade="all, delete-orphan")
+
+class Annotation(Base):
+    __tablename__ = "annotations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    row_id = Column(Integer, nullable=False)
+    project_id = Column(Integer, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False)
+    content = Column(String, nullable=True)
+    date = Column(DateTime, nullable=True)
+
+    project = relationship("Project", back_populates="annotations")
