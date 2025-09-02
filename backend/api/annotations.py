@@ -89,3 +89,41 @@ async def create_project(
     db.commit()
 
     return {"message": "Projet créé avec succès", "project": new_project.id}
+
+
+@router.get("/{project_id}")
+def get_project_details(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    # Vérifier que le projet existe
+    project = db.query(Project).filter(Project.id == project_id, Project.user_id == current_user.id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Projet non trouvé")
+
+    # Récupérer toutes les annotations associées
+    annotations = db.query(Annotation).filter(Annotation.project_id == project_id).all()
+
+    total = len(annotations)
+    done = sum(1 for a in annotations if a.content is not None)
+    completion = round((done / total * 100), 2) if total > 0 else 0
+
+    return {
+        "id": project.id,
+        "project_name": project.project_name,
+        "due_date": project.due_date,
+        "notes": project.notes,
+        "guidelines_file_path": project.guidelines_file_path,
+        "categories": project.categories,
+        "completion": completion,
+        "annotations": [
+            {
+                "id": a.id,
+                "row_id": a.row_id,
+                "content": a.content,
+                "date": a.date
+            }
+            for a in annotations
+        ]
+    }

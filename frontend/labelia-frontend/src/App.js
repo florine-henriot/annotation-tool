@@ -5,7 +5,8 @@ import Signup from './components/signup/Signup';
 import ProtectedPage from './components/protection/RequireAuth';
 import DashboardPage from './pages/DashboardPage';
 import AnnotationsCreate from './components/annotations/AnnotationsCreate';
-import TestTipTap from './components/TestTipTap';
+import ProjectDetails from './components/project_home/ProjectHome';
+
 
 function App() {
   return(
@@ -24,7 +25,13 @@ function App() {
             <AnnotationsCreate />
           </ProtectedPage>
         } />
-        <Route path="/test" element={<TestTipTap/>}/>
+
+        <Route path="/annotations/:projectId" element={
+          <ProtectedPage>
+            <ProjectDetails />
+          </ProtectedPage>
+        } />
+        
       </Routes>
     </Router>
   );
