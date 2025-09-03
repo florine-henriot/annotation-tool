@@ -5,9 +5,13 @@ from database import engine
 from models import Base
 from api import auth, users, dasboard, annotations
 
+from fastapi.staticfiles import StaticFiles
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Middleware pour les headers de sécurité
 @app.middleware("http")
@@ -22,12 +26,12 @@ async def add_security_headers(request, call_next):
         "img-src 'self' data:; "
         "connect-src 'self' http://localhost:3000 http://localhost:8000 ws://localhost:3000; "
         "font-src 'self' data:; "
-        "frame-src 'self';"
+        "frame-src 'self' http://localhost:3000;"
     )
 
     # Autres headers de sécurité
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
+    #response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
 

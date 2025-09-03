@@ -9,15 +9,30 @@ import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from 'react-router-dom';
+import { CircleX } from 'lucide-react';
 
 function ProjectDetails() {
   const { projectId } = useParams(); // récupère l'ID depuis l'URL
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pdfBlob, setPdfBlob] = useState(null);
   const [showGuidelines, setShowGuidelines] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const navigate = useNavigate();
+
+  const fetchPdf = async () => {
+  try {
+    const response = await axiosClient.get(
+      `/uploads/${project.guidelines_file_path.split(/[/\\]/).pop()}`,
+      { responseType: 'blob' } // <- important
+    );
+    const fileURL = URL.createObjectURL(response.data);
+    setPdfBlob(fileURL);
+  } catch (err) {
+    console.error("Erreur téléchargement PDF :", err);
+  }
+};
   
   useEffect(() => {
     const fetchProject = async () => {
@@ -148,42 +163,42 @@ function ProjectDetails() {
           </div>
         </div>
       </div>
-      </div>
 
       <div className="project-actions">
-      {/* Bouton Guidelines */}
-      <button
-        className="action-button"
-        disabled={!project.guidelines_file_path} // non cliquable si pas de guidelines
-        onClick={() => setShowGuidelines(true)}
-      >
-        Consulter les guidelines
-      </button>
+        <button
+          className="action-button"
+          disabled={!project.guidelines_file_path}
+          onClick={async () => {
+            await fetchPdf();
+            setShowGuidelines(true);
+          }}
+        >
+          Consulter les guidelines
+        </button>
 
-      {/* Bouton Notes */}
-      <button
-        className="action-button"
-        onClick={() => setShowNotes(true)}
-      >
-        Consulter mes notes
-      </button>
+        <button
+          className="action-button"
+          onClick={() => setShowNotes(true)}
+        >
+          Consulter mes notes
+        </button>
 
-      {/* Bouton Annoter */}
-      <button
-        className="action-button"
-        onClick={() => navigate(`/annotations/annotate/${project.id}`)}
-      >
-        Annoter
-      </button>
-    </div>
+        <button
+          className="action-button"
+          onClick={() => navigate(`/annotations/annotate/${project.id}`)}
+        >
+          Annoter
+        </button>
+      </div>
+      </div>
 
-      {/* Popup Guidelines */}
-      {showGuidelines && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <span className="close-popup" onClick={() => setShowGuidelines(false)}>✖</span>
+
+      {showGuidelines && pdfBlob && (
+        <div className="popup-overlay-guidelines">
+          <div className="popup-content-guidelines">
+            <CircleX className="close-icon" onClick={() => setShowGuidelines(false)} />
             <iframe
-              src={`${process.env.REACT_APP_API_URL}/uploads/${project.guidelines_file_path.split("\\").pop()}`}
+              src={pdfBlob}
               width="100%"
               height="600px"
               title="Guidelines"
@@ -194,9 +209,9 @@ function ProjectDetails() {
 
       {/* Popup Notes */}
       {showNotes && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <span className="close-popup" onClick={() => setShowNotes(false)}>✖</span>
+        <div className="popup-overlay-notes">
+          <div className="popup-content-notes">
+            <CircleX className="close-icon" onClick={() => setShowNotes(false)} />
             <div dangerouslySetInnerHTML={{ __html: project.notes || "<p>Aucune note</p>" }} />
           </div>
         </div>
