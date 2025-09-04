@@ -5,6 +5,7 @@
   --color-primary-hover: #2563EB;
   --color-border: #E5E7EB;
   --color-white: #FFFFFF;
+  --color-secondary: #f2f0f0;
   
   --border-radius: 12px;
   --border-style: 2px solid var(--color-border);
@@ -24,6 +25,7 @@ body {
   grid-template-rows: 1fr; /*Une ligne par défaut */
   background-color: var(--color-background);
   place-items: center;
+  padding-top: 60px;
 }
 
 .site-name {
@@ -46,4 +48,12 @@ body {
   justify-content: center;
   padding: 20px;
   margin: 20px;
+}
+
+.card {
+  border: var(--border-style);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }

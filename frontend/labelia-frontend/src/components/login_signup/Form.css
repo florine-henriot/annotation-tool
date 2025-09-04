@@ -1,0 +1,37 @@
+.login-signup-card {
+    width: 560px; 
+    max-width: 560px;
+    align-self: center;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+.title {
+    font-size: 26px;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.message {
+    font-size: 14px;
+    color: #6B7280;
+    text-align: center;
+    display: block;
+    margin: 20px 0 0 0;
+}
+
+.login-signup-card > button:first-of-type {
+  margin-bottom: 30px;  /* espace réduit uniquement pour le dernier bouton dans la carte */
+}
+
+.login-signup-card > button:last-of-type {
+  margin-top: 8px;  /* espace réduit uniquement pour le dernier bouton dans la carte */
+}
