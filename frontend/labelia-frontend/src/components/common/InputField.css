@@ -1,0 +1,20 @@
+.input-field {
+    width: 100%;
+    max-width: 250px;
+    height: 50px;
+    border-radius: var(--border-radius);
+    border: var(--border-style);
+    font-size: 16px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-top: 30px;
+    background-color: var(--color-white);
+}
+
+.input-field:focus {
+    border-color: var(--color-primary);
+}

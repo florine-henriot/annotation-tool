@@ -5,6 +5,9 @@
   --color-primary-hover: #2563EB;
   --color-border: #E5E7EB;
   --color-white: #FFFFFF;
+  
+  --border-radius: 12px;
+  --border-style: 2px solid var(--color-border);
 }
 
 body {
@@ -34,4 +37,13 @@ body {
   height: 50px;
   display: inline-block;
   margin-right: 12px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px;
 }
