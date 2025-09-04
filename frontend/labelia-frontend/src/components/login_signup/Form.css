@@ -1,7 +1,9 @@
 .login-signup-card {
-    width: 560px; 
-    max-width: 560px;
+    width: 500px; 
+    max-width: 500px;
     align-self: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .avatar {
