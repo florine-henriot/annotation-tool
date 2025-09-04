@@ -1,10 +1,15 @@
 import React from 'react';
 import TopbarLoginSignup from '../login_signup/TopbarLoginSignup';
 import InputField from '../common/InputField';
+import ButtonSubmit from '../common/ButtonSubmit';
 
 export default function Login() {
 
     const [email, setEmail] = React.useState('');
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+    }
 
     return (
         <div className='page'>
@@ -19,6 +24,11 @@ export default function Login() {
                 placeholder="Entrez votre email"
                 required={true}
                 />
+
+                <ButtonSubmit
+                text="CONNEXION"
+                onClick={handleLogin}
+                disabled={false} />
             </div>
 
         </div>
