@@ -37,3 +37,10 @@
 .login-signup-card > button:last-of-type {
   margin-top: 8px;  /* espace réduit uniquement pour le dernier bouton dans la carte */
 }
+
+.login-message {
+    color: #e63946;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}

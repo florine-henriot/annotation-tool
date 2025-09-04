@@ -76,6 +76,9 @@ export default function LoginForm() {
                     disabled={false}
                 />
 
+                {/* Message d'information ou d'erreur */}
+                {message && <p className='login-message'>{message}</p>}
+
                 <span className='message'>Pas encore inscrit ?</span>
 
                 <ButtonRedirect
