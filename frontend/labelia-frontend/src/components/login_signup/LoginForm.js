@@ -8,12 +8,43 @@ import PasswordInput from './PasswordInput';
 import "../../App.css";
 import "./Form.css";
 
+/**
+ * LoginForm
+ * 
+ * Composant de formulaire de connexion.
+ * Permet à un utilisateur de rentrer son email et mot de passe, d'envoyer
+ * une requête de connexion au backend et de gérer l'état d'affichage
+ * des messages d'erreur.
+ * 
+ * Utilise:
+ * - InputField : composant pour champ email
+ * - PasswordInput : composant pour le champ mot de passe
+ * - ButtonSubmit : bouton pour soumettre le formulaire
+ * - ButtonRedirect : bouton pour redirection vers la page d'inscription
+ * 
+ * @returns {JSX.Element} Formulaire de connexion avec gestion des 
+ *      messages et redirection.
+ */
+
 export default function LoginForm() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [message, setMessage] = React.useState('');
+    // Etats locaux du formulaire
+    const [email, setEmail] = React.useState(''); // Adresse mail de l'utilisateur
+    const [password, setPassword] = React.useState(''); // Mot de passe de l'utilisateur
+    const [message, setMessage] = React.useState(''); // Message d'erreur ou d'information
+
+    /**
+     * handleLogin
+     * 
+     * Fonction déclenchée lors de la soumission du formulaire.
+     * - Empêche le rechargement de la page
+     * - Envoie une requête POST à auth/login avec email et password
+     * - Si la connexion réussit, teste un endpoint protégé et redirige vers le dashboard
+     * - Sinon, affiche le message d'erreur renvoyé par le backend
+     * 
+     * @param {React.FormEvent>HTMLFormElement} e - Evènement de soumission du formulaire
+     */
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -81,14 +112,15 @@ export default function LoginForm() {
 
                 <span className='message'>Pas encore inscrit ?</span>
 
-                <ButtonRedirect
-                    className=""
-                    text="INSCRIVEZ-VOUS"
-                    to="/signup"
-                    disabled={false}
-                />
-
             </form>
+
+            
+            <ButtonRedirect
+                className=""
+                text="INSCRIVEZ-VOUS"
+                to="/signup"
+                disabled={false}
+            />
 
         </div>
     )
