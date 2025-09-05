@@ -25,20 +25,20 @@ body {
   grid-template-rows: 1fr; /*Une ligne par défaut */
   background-color: var(--color-background);
   place-items: center;
-  padding-top: 60px;
+  padding-top: clamp(1rem, 3vw, 2rem);
 }
 
 .site-name {
-  font-size: 32px;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: bold;
   color: var(--color-primary);
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  width: clamp(2rem, 5vw, 3rem);
+  height: clamp(2rem, 5vw, 3rem);
   display: inline-block;
-  margin-right: 12px;
+  margin-right: clamp(0.5rem, 5vw, 1rem);
 }
 
 .container {
@@ -46,14 +46,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  margin: 20px;
+  padding: clamp(1rem, 5vw, 1.25rem);
+  margin: clamp(1rem, 5vw, 1.25rem);
 }
 
 .card {
   border: var(--border-style);
   background-color: var(--color-white);
   border-radius: var(--border-radius);
-  padding: 40px 20px;
+  padding: clamp(1.25rem, 5vw, 2.5rem) clamp(1rem, 5vw, 1.25rem);
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }

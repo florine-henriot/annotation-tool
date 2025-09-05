@@ -38,9 +38,12 @@ async def add_security_headers(request, call_next):
     return response
 
 # Configuration CORS pour le frontend local
+origins = [
+    "http://localhost:3000"
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # autorise le frontend React
+    allow_origins=origins,  # autorise le frontend React
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
