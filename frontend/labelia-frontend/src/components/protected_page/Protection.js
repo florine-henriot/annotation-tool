@@ -20,7 +20,7 @@ export default function Protection() {
     return (
         <div className="card">
             {/* Avatar affiché */}
-            <img src="./avatar/logged_out.png" alt="Avatar" className='avatar' />
+            <img src="./avatar/logged_out.png" alt="Avatar" className='avatar-protection' />
             
             {/* Message informatif */}
             <h2 className="title-logged-out">Vous n'êtes pas connecté.</h2>
