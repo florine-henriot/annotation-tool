@@ -21,11 +21,11 @@ async def add_security_headers(request, call_next):
     # Content Security Policy (CSP)
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000; "
-        "style-src 'self' 'unsafe-inline' http://localhost:3000; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' http://localhost:3000 https://cdn.jsdelivr.net; "
         "img-src 'self' data:; "
         "connect-src 'self' http://localhost:3000 http://localhost:8000 ws://localhost:3000; "
-        "font-src 'self' data:; "
+        "font-src 'self' data: https://cdn.jsdelivr.net; "
         "frame-src 'self' http://localhost:3000;"
     )
 

@@ -17,6 +17,7 @@ import "./Form.css";
  * des messages d'erreur.
  * 
  * Utilise:
+ * 
  * - InputField : composant pour champ email
  * - PasswordInput : composant pour le champ mot de passe
  * - ButtonSubmit : bouton pour soumettre le formulaire

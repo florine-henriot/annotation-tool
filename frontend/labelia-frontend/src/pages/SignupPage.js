@@ -1,6 +1,6 @@
 import React from 'react';
-import TopbarLoginSignup from '../login_signup/TopbarLoginSignup';
-import SignupForm from '../login_signup/SignupForm';
+import TopbarLoginSignup from '../components/login_signup/TopbarLoginSignup';
+import SignupForm from '../components/login_signup/SignupForm';
 
 /**
  * Signup
