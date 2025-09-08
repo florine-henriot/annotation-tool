@@ -9,6 +9,7 @@
     border-radius: var(--border-radius);
     border: 1px solid var(--color-border);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow-y: auto; 
 }
 
 .nav-button {
@@ -43,4 +44,75 @@
 .nav-button.small-right {
     width: 70%;           /* bouton plus petit */
     margin-left: 40px;    /* décalage vers la droite */
+}
+
+/* Bouton "ouvrir sidebar" (mobile) */
+.sidebar-toggle {
+  display: none; /* caché par défaut */
+}
+
+/* ----- Mobile / Tablette ----- */
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    display: none; /* sidebar masquée */
+  }
+
+  .sidebar.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 65px);
+    z-index: 1000;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    border-radius: var(--border-radius);
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 65px);
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  /* bouton visible sous la topbar */
+  .sidebar-toggle {
+    position: fixed;
+    display: flex;
+    margin: 8px;
+    padding: 8px 12px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 1100;
+    left: 5px;
+    top: 65px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+}
+
+/* ----- Desktop : cacher overlay et boutons ----- */
+@media screen and (min-width: 1025px) {
+  .overlay,
+  .sidebar-toggle,
+  .close-btn {
+    display: none;
+  }
 }
