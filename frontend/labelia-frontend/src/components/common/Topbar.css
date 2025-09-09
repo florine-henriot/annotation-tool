@@ -83,3 +83,9 @@
 .account-button:hover {
   background-color: var(--color-secondary);
 }
+
+@media screen and (max-width: 768px) {
+  .breadcrumbs {
+    display: none;
+  }
+}
