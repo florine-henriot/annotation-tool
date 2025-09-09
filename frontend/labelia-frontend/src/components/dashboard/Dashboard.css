@@ -1,0 +1,39 @@
+.dashboard-card {
+    display: flex;
+    width: 90%;
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-direction: column;
+}
+
+.dashboard-title {
+    font-size: 18px;
+    color: var(--color-primary);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.add-project-button {
+    display: flex;
+    max-width: 220px;
+    height: 40px;
+    margin-top: 20px;
+    border: none;
+    background-color: var(--color-secondary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-text);
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 40px;
+    gap: 10px;
+}
+
+.add-project-button:hover {
+    background-color: var(--color-hover);
+}

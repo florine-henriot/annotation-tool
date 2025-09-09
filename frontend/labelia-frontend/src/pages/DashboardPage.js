@@ -28,7 +28,11 @@ export default function DashboardPage() {
 
             <Layout icon={PieChart} pageTitle={"Dashboard"} />
 
-            <DashboardEmpty />
+            <div className="container">
+
+                <DashboardEmpty />
+
+            </div>
 
         </div>
     )

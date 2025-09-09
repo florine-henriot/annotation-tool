@@ -46,7 +46,7 @@ export default function RequireAuth ( { children }) {
 
                 <TopbarLoginSignup />
 
-                <div className='container'>
+                <div className='container-no-side-bar'>
 
                     <Protection />
 

@@ -6,6 +6,7 @@
   --color-border: #E5E7EB;
   --color-white: #FFFFFF;
   --color-secondary: #f2f0f0;
+  --color-hover: #e6dbdb;
   
   --border-radius: 12px;
   --border-style: 2px solid var(--color-border);
@@ -45,9 +46,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: clamp(1rem, 5vw, 1.25rem);
+  margin: 0 auto;
+  height: calc(100vh - 70px);
+}
+
+.container-no-side-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: clamp(1rem, 5vw, 1.25rem);
-  margin: clamp(1rem, 5vw, 1.25rem);
+
 }
 
 .card {
@@ -56,4 +66,24 @@ body {
   border-radius: var(--border-radius);
   padding: clamp(1.25rem, 5vw, 2.5rem) clamp(1rem, 5vw, 1.25rem);
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.text {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    margin-left: 16%;
+    width: calc(100% - 19%);
+  }
+}
+
+@media (max-width: 1023px) {
+  .container {
+    margin-left: 0;
+    margin-top: 100px;
+    width: 90%;
+  }
 }

@@ -23,7 +23,7 @@ export default function Signup() {
 
             <TopbarLoginSignup />
 
-            <div className='container'>
+            <div className='container-no-side-bar'>
 
                 <SignupForm />
 
