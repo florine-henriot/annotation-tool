@@ -5,6 +5,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     flex-direction: column;
+    overflow-x: auto;
 }
 
 .dashboard-title {
@@ -36,4 +37,149 @@
 
 .add-project-button:hover {
     background-color: var(--color-hover);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-radius: var(--border-radius);
+    border-spacing: 0;
+    overflow: hidden;
+    font-size: 14px;
+    table-layout: auto;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.dashboard-table th {
+    background-color: var(--color-hover);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.dashboard-table tr:nth-child(even) {
+    background-color: var(--color-secondary);
+}
+
+.status-badge {
+    color: var(--color-white);
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: var(--color-background);
+    border-radius: 9999px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #48e8a5;
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #EF4444;
+}
+
+.popup-button-cancel {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #e65656;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.popup-button-delete {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #2563EB;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard-card {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .dashboard-title {
+    font-size: 16px;
+  }
+
+  .add-project-button {
+    width: 200px;
+    font-size: 12px;
+    height: 36px;
+    margin-top: 15px;
+  }
+
+  /* Table en mode mobile → scroll horizontal */
+  .dashboard-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  /* Progress bar plus fine */
+  .progress-bar {
+    height: 8px;
+  }
+
+  /* Boutons popup adaptés */
+  .popup-button-cancel,
+  .popup-button-delete {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* 📱📲 Tablette (601px à 1024px) */
+@media (max-width: 1024px) {
+  .dashboard-card {
+    width: 95%;
+  }
+
+  .dashboard-title {
+    font-size: 17px;
+  }
+
+  .add-project-button {
+    width: auto;
+    padding: 0 1rem;
+    font-size: 13px;
+  }
+
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 10px 15px;
+  }
 }

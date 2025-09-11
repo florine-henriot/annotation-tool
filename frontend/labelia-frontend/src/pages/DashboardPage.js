@@ -1,6 +1,7 @@
 import React from "react";
 import axiosClient from "../components/api/axiosClient";
 import DashboardEmpty from "../components/dashboard/DashboardEmpty";
+import DashboardNotEmpty from "../components/dashboard/DashboardNotEmpty";
 import Layout from "../components/common/Layout";
 import LoadingPage from "./LoadingPage";
 import { PieChart } from 'lucide-react';
@@ -42,6 +43,12 @@ export default function DashboardPage() {
         <div className="page">
 
             <Layout icon={PieChart} pageTitle={"Dashboard"} />
+
+            <div className="container">
+
+                <DashboardNotEmpty />
+
+            </div>
 
         </div>
     )

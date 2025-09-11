@@ -39,7 +39,8 @@ async def add_security_headers(request, call_next):
 
 # Configuration CORS pour le frontend local
 origins = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://10.0.2.2:3000"
 ]
 app.add_middleware(
     CORSMiddleware,
