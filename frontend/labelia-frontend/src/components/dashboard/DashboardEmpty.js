@@ -3,6 +3,18 @@ import { NavLink } from "react-router-dom";
 import "../../App.css";
 import "./Dashboard.css";
 
+/**
+ * DashboardEmpty
+ * 
+ * Ce composant est affiché lorsqu'aucun projet d'annotation n'existe encore.
+ * Il sert de "placeholder" dans le tableau de bord et propose : 
+ * - Un titre
+ * - Un message indiquant l'absence de projets
+ * - Un bouton permettant de créer un nouveau projet
+ * 
+ * @returns {JSX.Element} Une carte vide avec un message et un bouton de création de projet.
+ */
+
 export default function DashboardEmpty() {
     return (
         <div className="card dashboard-card">

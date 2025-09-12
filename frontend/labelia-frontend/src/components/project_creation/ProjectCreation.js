@@ -9,25 +9,51 @@ import axiosClient from '../api/axiosClient';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../common/Popup';
 
+/**
+ * ProjectCreation
+ * 
+ * Page permettant à l'utilisateur de créer un projet d'annotation.
+ * 
+ * Fonctionnalités : 
+ * - Remplir un formulaire avec les informations du projet (nom, date, catégories, notes)
+ * - Upload de fichiers (CSV obligatoire, PDF facultatif)
+ * - Envoi des données via axios (multipart/form-data)
+ * - Popup de foncormation en cas de succès
+ * - Redirection automatique vers le tableau de bord
+ * 
+ * @returns 
+ */
+
 export default function ProjectCreation() {
     const navigate = useNavigate();
 
+    // States pour stocker les valeurs du formulaire
     const [projectName, setProjectName] = React.useState("");
     const [categories, setCategories] = React.useState("");
     const [annotationFile, setAnnotationFile] = React.useState(null);
     const [guidelinesFile, setGuidelinesFile] = React.useState(null);
     const [notes, setNotes] = React.useState('');
 
+    // Affichage conditionnel du popup de succès
     const [showPopup, setShowPopup] = React.useState(false);
 
+    // Gestion du fichier CSV obligatoire
     const handleAnnotationFileChange = (e) => {
         setAnnotationFile(e.target.files[0]);
     };
 
+    // Gestion du fichier PDF facultatif
     const handleGuidelinesFileChange = (e) => {
         setGuidelinesFile(e.target.files[0]);
     };
 
+    /**
+     * Envoi du formulaire au backend
+     * - Construction d'un FormData (obligatoire pour uploader des fichiers)
+     * - POST vers /annotations/create
+     * - Affichage popup + redirection si succès
+     * @param {*} e 
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -55,6 +81,7 @@ export default function ProjectCreation() {
         }
     };
 
+    // Fermeture manuelle du popup (si l'utilisateur clique dessus)
     const handleClosePopup = () => {
         setShowPopup(false);
         navigate("/dashboard");

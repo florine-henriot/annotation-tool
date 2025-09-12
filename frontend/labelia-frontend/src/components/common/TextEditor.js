@@ -9,28 +9,53 @@ import { CiTextAlignCenter, CiTextAlignRight, CiTextAlignJustify, CiTextAlignLef
 import { AiOutlineUnorderedList, AiOutlineOrderedList, AiOutlineBold, AiOutlineItalic, AiOutlineUnderline } from "react-icons/ai";
 import './RichTextEditor.css'
 
+/**
+ * RichTextEditor
+ * 
+ * Un éditeur de texte riche basé sur Tiptap, avec des options de mise en forme : 
+ * - Alignement (gauche, centre, droite, justifié)
+ * - Listes (ordonnées et non ordonées)
+ * - Styles de texte (gras, italique, souligné)
+ * - Choix de couleur du texte
+ * 
+ * @param {string} value - Contenu initial de l'étidteur (HTML)
+ * @param {function} onChange - Callback appelé à chaque mise à jour du contenu (retourne le HTML) 
+ * 
+ * @returns 
+ */
+
 export default function RichTextEditor({ value = '', onChange }) {
+    // Etat pour savoir si l'éditeur est focus
     const [focused, setFocused] = useState(false)
+
+    // Initialisation de l'éditeur Tiptap
     const editor = useEditor({
         extensions: [
-        StarterKit,
-        TextAlign.configure({ types: ['heading', 'paragraph'] }),
-        Underline,
-        TextStyle,
-        Color,
+        StarterKit, // fournit des fonctionnalités de base (paragraphe, heading, etc)
+        TextAlign.configure({ types: ['heading', 'paragraph'] }), // alignement de texte
+        Underline, // extension pour souligner
+        TextStyle, // nécessaire pour appliquer les couleurs
+        Color, // extension pour changer la couleur du texte
         ],
-        content: value,
-        onUpdate: ({ editor }) => onChange(editor.getHTML()),
+        content: value, // contenu initial
+        onUpdate: ({ editor }) => onChange(editor.getHTML()), // callback déclenché à chaque changement
     })
 
+    // Affiche un message pendant le chargement de l'éditeur
     if (!editor) return <div>Chargement de l'éditeur…</div>
 
+    /**
+     * Fonction utilitaire pour appliquer un alignement
+     * 
+     * @param {'left' | 'center' | 'right' | 'justify'} align 
+     * @returns 
+     */
     const applyAlign = (align) => {
         if (!editor) return
         editor.chain().focus().setTextAlign(align).run()
     }
 
-
+    // Palette de couleurs disponibles
     const colors = [
         { name: 'Noir', color: '#000000' },
         { name: 'Rouge', color: '#ef4444' },

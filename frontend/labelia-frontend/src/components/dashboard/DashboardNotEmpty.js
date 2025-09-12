@@ -6,12 +6,32 @@ import axiosClient from "../api/axiosClient";
 import { NavLink, useNavigate } from "react-router-dom";
 import Popup from "../common/Popup";
 
+/**
+ * DashboardNotEmpty
+ * 
+ * Ce composant affiche la liste des projets d'annotation existants sous forme de tableau.
+ * Il propose : 
+ * - Un tableau listant les projets avec : nom, d'ate d'échéance, statut et progression
+ * - Un bouton pour supprimer un projet (avec popup de confirmation)
+ * - Un bouton pour créer un nouveau projet.
+ * 
+ * Logique principale : 
+ * - Récupère les projets depuis l'API "/dashboard" au montage 
+ * - Met à jour dynamiquement la liste en cas de suppression
+ * - Gère un état "projectToDelete" pour afficher une popup avant suppression
+ * 
+ * @returns {JSX.Element} Une carte avec tableau des projets et actions associées
+ */
+
 export default function DashboardNotEmpty() {
+    // Liste des projets récupérés
     const [projects, setProjects] = React.useState([]);
+    // Projet sélectionné pour suppression
     const [projectToDelete, setProjectToDelete] = React.useState(null);
 
     const navigate = useNavigate();
 
+    // Chargement initial des projets depuis l'API
     React.useEffect(() => {
         axiosClient.get("/dashboard")
         .then(res => {
@@ -24,15 +44,24 @@ export default function DashboardNotEmpty() {
         .catch(err => console.error("Erreur de récupération projets :", err));
     }, []);
 
+    /**
+     * Retourne une couleur correspondant au statut du projet
+     * @param {string} status - Le statut du projet
+     * 
+     * @returns {string} Une couleur en hexadécimal
+     */
     const getStatusColor = (status) => {
         switch(status) {
-            case 'pending': return "#F59E0B";
-            case 'completed': return "#10B981";
-            case 'archived': return "#6B7280";
-            default: return "#9CA3AF";
+            case 'pending': return "#F59E0B"; // orange
+            case 'completed': return "#10B981"; // vert
+            case 'archived': return "#6B7280"; // gris foncé
+            default: return "#9CA3AF"; // gris clair
         }
     };
 
+    /**
+     * Supprime définitivement un projet via l'API puis met à jour la list localement.
+     */
     const handleDelete = async () => {
         try {
             await axiosClient.delete(`/dashboard/annotations/${projectToDelete.id}`);
