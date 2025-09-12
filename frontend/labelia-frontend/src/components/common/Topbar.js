@@ -61,7 +61,7 @@ export default function TopBar( { icon: Icon, pageTitle }) {
 
     return (
         <div className="topbar-common">
-            <img src='./avatar/logo_labelia.png' alt='Logo' className='logo' />
+            <img src='/avatar/logo_labelia.png' alt='Logo' className='logo' />
             <span className='site-name'>Labelia</span>
 
             {/* Breadcrumbs cachés en mobile */}

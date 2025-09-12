@@ -27,6 +27,7 @@ body {
   background-color: var(--color-background);
   place-items: center;
   padding-top: clamp(1rem, 3vw, 2rem);
+  padding-bottom: clamp(1rem, 3vw, 2rem);
 }
 
 .site-name {
@@ -48,7 +49,7 @@ body {
   align-items: center;
   padding: clamp(1rem, 5vw, 1.25rem);
   margin: 0 auto;
-  height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px);
 }
 
 .container-no-side-bar {

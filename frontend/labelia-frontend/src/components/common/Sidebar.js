@@ -66,14 +66,14 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Liste dynamique des projets */}
         {projects.length > 0 && projects.map(project => (
           <NavLink key={project.id} to={`/annotations/${project.id}`} 
-            className={({isActive}) => isActive ? "nav-button active": "nav-button small-right"}>
+            className={({isActive}) => isActive ? "nav-button small-right active": "nav-button small-right"}>
             <span><File size={18} /></span>
             <span>{project.project_name}</span>
           </NavLink>
         ))}
 
         {/* Lien pour créer un projet */}
-        <NavLink to="/annotations/create" className={({isActive}) => isActive ? "nav-button active": "nav-button small-right"}>
+        <NavLink to="/annotations/create" className={({isActive}) => isActive ? "nav-button small-right active": "nav-button small-right"}>
           <span><FilePlus size={18} /></span>
           <span>Ajouter</span>
         </NavLink>

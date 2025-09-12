@@ -4,6 +4,7 @@ import Login from './pages/LoginPage';
 import Signup from './pages/SignupPage';
 import RequireAuth from './pages/RequireAuthPage';
 import DashboardPage from './pages/DashboardPage';
+import ProjectCreationPage from './pages/ProjetCreationPage';
 
 
 
@@ -21,6 +22,13 @@ function App() {
               <DashboardPage />
             </RequireAuth>
           } />
+        <Route path="/annotations/create"
+          element= {
+            <RequireAuth>
+              <ProjectCreationPage />
+            </RequireAuth>
+          }
+        />
 
       </Routes>
 
