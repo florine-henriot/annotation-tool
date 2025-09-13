@@ -1,0 +1,29 @@
+.container-project-home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 250px); /* hauteur fixe pour bien visualiser */
+  gap: 15px;
+  padding: clamp(1rem, 5vw, 1.25rem);
+  margin: 0 auto;
+  min-height: calc(100vh - 70px);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  width: 350px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+}
+
+.project-home-subtitle {
+    font-size: 16px;
+    color: var(--color-primary);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
