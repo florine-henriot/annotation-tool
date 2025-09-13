@@ -37,7 +37,7 @@ export default function ProjectHomePage() {
 
             <div className="container">
 
-                <ProjectHome />
+                <ProjectHome project={project}/>
 
             </div>
 

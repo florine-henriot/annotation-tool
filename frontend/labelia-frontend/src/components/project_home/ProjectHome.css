@@ -1,20 +1,21 @@
 .container-project-home {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 250px); /* hauteur fixe pour bien visualiser */
+  grid-template-rows: 200px 350px 100px;
   gap: 15px;
   padding: clamp(1rem, 5vw, 1.25rem);
   margin: 0 auto;
   min-height: calc(100vh - 70px);
+  width: 90%;
 }
 
 .cell {
   display: flex;
+  flex-direction: column;;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   color: white;
-  width: 350px;
   border-radius: var(--border-radius);
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
@@ -26,4 +27,24 @@
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
+}
+
+.wide {
+  grid-column: span 3; /* occupe les 3 colonnes */
+}
+
+.subgrid {
+  display: grid;
+  grid-template-rows: 1fr 1fr; /* 2 parties égales = 175px chacune */
+  gap: 10px;
+  height: 100%;
+}
+
+.project-title {
+    font-size: 24px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
 }

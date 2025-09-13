@@ -1,8 +1,19 @@
 import "./ProjectHome.css";
 
-export default function ProjectHome() {
+import CompletionCard from "./CompletionBarCard";
+
+
+export default function ProjectHome( {project }) {
     return (
         <div className="container-project-home">
+
+            <div className="cell wide">
+                <h2 className="project-title">
+                    {project.project_name}
+                </h2>
+                <CompletionCard project={project} />
+            </div>
+
             <div className="cell">
                 <h2 className="project-home-subtitle">
                     Répartition des catégories
@@ -15,23 +26,25 @@ export default function ProjectHome() {
                 </h2>
             </div>
 
-            <div className="cell">
+            <div className="subgrid">
+                <div className="cell">
+                    <h2 className="project-home-subtitle">
+                        Date d'échéance
+                    </h2>
+                </div>
+                <div className="cell">
+                    <h2 className="project-home-subtitle">
+                        Nombre moyen par jour
+                    </h2>
+                </div>
+            </div>
+
+            <div className="cell wide">
                 <h2 className="project-home-subtitle">
-                    Date d'échéance
+                    Boutons d'action
                 </h2>
             </div>
 
-            <div className="cell">
-                <h2 className="project-home-subtitle">
-                    Nombre moyen d'annotations par jour
-                </h2>
-            </div>
-
-            <div className="cell">5</div>
-            <div className="cell">6</div>
-            <div className="cell">7</div>
-            <div className="cell">8</div>
-            <div className="cell">9</div>
         </div>
     )
 }
