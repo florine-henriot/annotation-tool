@@ -1,0 +1,37 @@
+.project-cards-container {
+  display: flex;
+  gap: 20px;       /* espace entre les cartes */
+  margin-top: 20px;
+  width: 90%;
+  min-width: 90%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.chart-and-legend {
+  display: flex;
+  align-items: center;  /* ⚡ centre verticalement */
+  justify-content: center; /* facultatif si tu veux centrer le bloc entier */
+  gap: 20px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: black;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}

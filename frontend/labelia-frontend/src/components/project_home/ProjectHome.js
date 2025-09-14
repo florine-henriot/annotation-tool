@@ -1,13 +1,14 @@
 import "./ProjectHome.css";
 
 import CompletionCard from "./CompletionBarCard";
+import CategoriesGraph from "./CategoriesGraph";
 
 
 export default function ProjectHome( {project }) {
     return (
         <div className="container-project-home">
 
-            <div className="cell wide">
+            <div className="cell-title wide">
                 <h2 className="project-title">
                     {project.project_name}
                 </h2>
@@ -18,6 +19,9 @@ export default function ProjectHome( {project }) {
                 <h2 className="project-home-subtitle">
                     Répartition des catégories
                 </h2>
+                <div className="cell-content">
+                    <CategoriesGraph project={project} />
+                </div>
             </div>
             
             <div className="cell">
