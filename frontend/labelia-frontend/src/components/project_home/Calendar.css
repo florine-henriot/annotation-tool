@@ -1,0 +1,80 @@
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.highlighted-day {
+  background-color: #b66bc6 !important;
+  border-radius: 20%;
+}
+
+.react-calendar {
+    border: none !important;
+    border-radius: var(--border-radius) !important;
+    background-color: var(--color-background) !important;
+    font-family: 'Helvetica', sans-serif !important;
+    color: var(--color-text) !important;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-weight: normal;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: center;  /* centre tout le bloc horizontalement */
+  align-items: center;      /* aligne verticalement flèches + label */
+}
+
+.react-calendar__navigation__label {
+  display: inline-block;   /* important : ne pas être flex */
+  flex: none !important;   /* empêche le bouton de s'étirer */
+  width: auto !important;  /* largeur automatique selon le texte */
+  min-width: 0 !important; /* supprime les min-width imposées */
+  font-size: 20px;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.react-calendar__tile,
+.react-calendar__tile *,
+.react-calendar__tile--now,
+.react-calendar__tile--active,
+.react-calendar__month-view__days__day--weekend {
+  color: var(--color-text) !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+
+
+.react-calendar__navigation button.react-calendar__navigation__arrow {
+  width: 20px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 30px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;      /* empêche les flèches de se réduire */
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-size: 16px;           /* taille du texte */
+  font-weight: normal;          /* gras */
+  text-transform: capitalize;  /* majuscules */
+  text-align: center;         /* centrer le texte */
+  padding: 10px 0;            /* espacement vertical */
+  text-decoration: none;
+  color: var(--color-text);
+  outline: none;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none; /* supprime le soulignement des abréviations */
+  border: none;
+}

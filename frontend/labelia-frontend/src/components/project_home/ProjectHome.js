@@ -2,6 +2,7 @@ import "./ProjectHome.css";
 
 import CompletionCard from "./CompletionBarCard";
 import CategoriesGraph from "./CategoriesGraph";
+import CalendarTracker from "./Calendar";
 
 
 export default function ProjectHome( {project }) {
@@ -25,9 +26,12 @@ export default function ProjectHome( {project }) {
             </div>
             
             <div className="cell">
-                <h2 className="project-home-subtitle">
+                {/* <h2 className="project-home-subtitle">
                     Tracker des annotations
-                </h2>
+                </h2> */}
+                <div className="cell-content">
+                    <CalendarTracker project={project} />
+                </div>
             </div>
 
             <div className="subgrid">
