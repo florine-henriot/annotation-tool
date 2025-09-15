@@ -3,6 +3,8 @@ import "./ProjectHome.css";
 import CompletionCard from "./CompletionBarCard";
 import CategoriesGraph from "./CategoriesGraph";
 import CalendarTracker from "./Calendar";
+import DueDate from "./DueDate";
+import MeanAnnotations from "../project_creation/MeanAnnotations";
 
 
 export default function ProjectHome( {project }) {
@@ -26,9 +28,9 @@ export default function ProjectHome( {project }) {
             </div>
             
             <div className="cell">
-                {/* <h2 className="project-home-subtitle">
+                <h2 className="project-home-subtitle">
                     Tracker des annotations
-                </h2> */}
+                </h2>
                 <div className="cell-content">
                     <CalendarTracker project={project} />
                 </div>
@@ -39,11 +41,17 @@ export default function ProjectHome( {project }) {
                     <h2 className="project-home-subtitle">
                         Date d'échéance
                     </h2>
+                    <div className="cell-content">
+                        <DueDate project={project} />
+                    </div>
                 </div>
                 <div className="cell">
                     <h2 className="project-home-subtitle">
-                        Nombre moyen par jour
+                        Nombre moyen d'annotations par jour
                     </h2>
+                    <div className="cell-content">
+                        <MeanAnnotations project={project} />
+                    </div>
                 </div>
             </div>
 

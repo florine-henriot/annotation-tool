@@ -1,0 +1,28 @@
+.due-date-text {
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.due-date-container {
+  display: flex;
+  flex-direction: column; /* met chaque élément sur une ligne */
+  text-align: center;
+}
+
+.due-future {
+  color: green;
+}
+
+.due-today {
+  color: orange;
+}
+
+.due-past {
+  color: red;
+}
+
+.due-date-message {
+  font-weight: bold;
+  margin-top: 15px; /* petit espace sous la date */
+}
