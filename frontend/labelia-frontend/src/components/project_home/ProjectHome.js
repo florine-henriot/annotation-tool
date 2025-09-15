@@ -4,7 +4,7 @@ import CompletionCard from "./CompletionBarCard";
 import CategoriesGraph from "./CategoriesGraph";
 import CalendarTracker from "./Calendar";
 import DueDate from "./DueDate";
-import MeanAnnotations from "../project_creation/MeanAnnotations";
+import MeanAnnotations from "./MeanAnnotations";
 
 
 export default function ProjectHome( {project }) {
