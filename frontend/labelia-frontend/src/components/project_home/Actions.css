@@ -1,0 +1,29 @@
+.actions-buttons-wrapper {
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* centre verticalement */
+    width: 100%;
+    height: 100%;            /* prend toute la hauteur du parent (.cell-content) */
+}
+
+.actions-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* centre les boutons horizontalement dans le container */
+    align-items: center;     /* centre verticalement chaque bouton si besoin */
+    gap: 20px;               /* espace entre les boutons */
+}
+
+.actions-buttons-container > * {
+    flex: 0 0 auto;          /* conserve la taille initiale des boutons */
+}
+
+.actions-buttons-container > .button-submit {
+    padding: 0 !important; /* supprime tout padding pour ces boutons uniquement */
+    margin: 0;              /* supprime le margin-top qui casse le centrage vertical */
+}
+
+.actions-buttons-container > .redirection-button {
+    padding: 0 !important; /* supprime tout padding pour ces boutons uniquement */
+    margin: 0;              /* supprime le margin-top qui casse le centrage vertical */
+}

@@ -5,6 +5,7 @@ import CategoriesGraph from "./CategoriesGraph";
 import CalendarTracker from "./Calendar";
 import DueDate from "./DueDate";
 import MeanAnnotations from "./MeanAnnotations";
+import ActionsButtons from "./Actions";
 
 
 export default function ProjectHome( {project }) {
@@ -56,9 +57,9 @@ export default function ProjectHome( {project }) {
             </div>
 
             <div className="cell wide">
-                <h2 className="project-home-subtitle">
-                    Boutons d'action
-                </h2>
+                <div className="cell-content">
+                    <ActionsButtons project={project} />
+                </div>
             </div>
 
         </div>
