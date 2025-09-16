@@ -90,7 +90,7 @@ async def create_project(
 
     return {"message": "Projet créé avec succès", "project": new_project.id}
 
-
+@router.get("/{project_id}/annotate")
 @router.get("/{project_id}")
 def get_project_details(
     project_id: int,
