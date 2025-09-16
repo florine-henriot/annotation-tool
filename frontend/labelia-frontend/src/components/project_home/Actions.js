@@ -5,19 +5,50 @@ import Popup from "../common/Popup";
 import ButtonRedirection from "../common/ButtonRedirection";
 import "./Actions.css";
 
+
+/**
+ * ActionsButtons
+ * 
+ * Composant React affichant les boutons d'action pour un projet d'annotation.
+ * 
+ * Affiche trois boutons principaux : 
+ * 1. Voir les guidelines : télécharge et ouvre le PDF des guidelines si disponible
+ * 2. Consulter les notes : ouvre un popup contenant les notes HTML du projet
+ * 3. Annoter : redirige l'utilisateur vers la page d'annotation.
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Object} props.project - Object représentant un projet
+ * @param {number} props.project.id - Identifiant unique du projet.
+ * @param {string} [props.project.guidelines_file_path] - Chemin du fichier de guidelines PDF.
+ * @param {string} [props.project.notes] - Notes associées au projet HTML
+ * 
+ * @example
+ * <ActionsButtons project={project} />
+ *  
+ * @returns {JSX.Element} Un conteneur avec les boutons d'action et les popups associées.
+ */
 export default function ActionsButtons({ project }) {
   const [pdfBlob, setPdfBlob] = React.useState(null);
   const [pdfDisabled, setDisabled] = React.useState(false);
   const [showGuidelines, setShowGuidelines] = React.useState(false);
   const [showNotes, setShowNotes] = React.useState(false);
 
+  /**
+   * Active ou désactive le bouton Voir les guidelines selon la présence d'un fichier.
+   */
   React.useEffect(() => {
     // Met à jour le bouton seulement si project change
     setDisabled(!project.guidelines_file_path);
   }, [project]);
 
-  console.log(project.guidelines_file_path);
-
+  /**
+   * Télécharge le PDF des guidelines et crée un URL blob pour afficher un iframe.
+   * 
+   * @async
+   * @function fetchPDF
+   * @returns {Promise<void>}
+   */
   const fetchPDF = async () => {
     try {
       const response = await axiosClient.get(
@@ -31,6 +62,7 @@ export default function ActionsButtons({ project }) {
     }
   };
 
+  // === Rendu composant ===
   return (
     <div className="actions-buttons-wrapper">
         <div className="actions-buttons-container">

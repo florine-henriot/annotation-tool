@@ -4,8 +4,34 @@ import Calendar from 'react-calendar';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
+/**
+ * CalendarTracker
+ * 
+ * Composant React affichant un calendrier avec suivi des annotations d'un projet.
+ * 
+ * Cahque date peut contenir des classes spéciales : 
+ * - due_date : date d'échéance du projet
+ * - annotation-day : jour contenu des annotations
+ * - today : jour actuel
+ * 
+ * Des tooltips sont affichés pour les jours annotés, la date d'échéance et aujourd'hui.
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant
+ * @param {Object} props.project - Object représentant le projet.
+ * @param {string} props.project.due_date - Date d'échéance du projet
+ * @param {Array<Object>} props.project.annotations - Liste des annotations
+ * @param {string} props.project.annotations[].date - Date de l'annotations
+ * 
+ * @example
+ * <CalendarTracker project={project} />
+ *  
+ * @returns {JSX.Element} Un composant affichant un calendirer avec annotations, la date d'échéance et aujourd'hui,
+ * ainsi que les tooltips correspondants.
+ */
 export default function CalendarTracker({ project }) {
 
+    // Regroupe les annotations par date
     const annotationsByDay = project.annotations.reduce((acc, a) => {
         if (a.date) {
             const day = new Date(a.date).toLocaleDateString('en-CA');

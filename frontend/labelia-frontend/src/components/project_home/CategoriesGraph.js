@@ -1,7 +1,29 @@
 import "./CategoriesGraph.css";
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 
+/**
+ * CategoriesGraph
+ * 
+ * Composant React affichant un graphique circulaire représentant la réparition
+ * des annotations par catégories pour un projet donné.
+ * 
+ * Les annotations sans catégorie sont affichées comme "Non annoté".
+ * Chaque catégorie possède une couleur unique.
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Object} props.project - Objet représentant le projet.
+ * @param {Array<string>} props.project.categories - Liste des catégories du projet.
+ * @param {Array<Object>} props.project.annotations - Liste des annotations du projet.
+ * @param {string} props.project.annotations[].content - Contenu ou catégorie associée à l'annotation.
+ * 
+ * @example
+ * <CategoriesGraph project={project} /> 
+ * 
+ * @returns {JSX.Element} Un composant affichant un graphique circulaire et une légende des catégories.
+ */
 export default function CategoriesGraph ( { project }) {
+    
     // Répartition des catégories
     const categoryData = project.categories.map((cat) => {
         const count = project.annotations.filter(a => a.content === cat).length;

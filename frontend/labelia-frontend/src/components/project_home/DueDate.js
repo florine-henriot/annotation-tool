@@ -1,5 +1,24 @@
 import "./DueDate.css";
 
+/**
+ * DueDate
+ * 
+ * Composant React affichant la date d'échéance d'un projet et un message indiquant si 
+ * la date est passée, présente ou future.
+ * 
+ * Le composant calcule le nombre de jours restants ou dépassés par rapport à la date actuelle et
+ * applique une classe CSS correspondante pour le style due-future, due-today et due-past.
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Object} props.project - Object représentant le projet.
+ * @param {string} props.project.due_date - Date d'échéance du projet au format ISO.
+ * 
+ * @example
+ * <DueDate projet={project} />
+ *  
+ * @returns {JSX.Element} Un composant affichant la date d'échéance et un message de statut. 
+ */
 export default function DueDate({ project }) {
 
     const dueDate = new Date(project.due_date);

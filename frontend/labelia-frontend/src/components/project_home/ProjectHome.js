@@ -7,7 +7,35 @@ import DueDate from "./DueDate";
 import MeanAnnotations from "./MeanAnnotations";
 import ActionsButtons from "./Actions";
 
-
+/**
+ * ProjectHome
+ * 
+ * Composant React affichant la page d'accueil d'un projet.
+ * 
+ * Il regroupe plusieurs sous-composants qui représentent : 
+ * - le nom du projet et sa progression globale
+ * - la répartition des catégories
+ * - Un calendrier de sui des annotations
+ * - La date d'échéance du projet
+ * - Le nombre moyen d'annotations par jour
+ * - Les actions possibles sur le projet
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant
+ * @param {Object} props.project - Object représentant le projet
+ * @param {string} props.project.project_name - Nom du projet
+ * @param {Array<Object>} props.project.annotations - Tableau des annotations du projet
+ * @param {Array<string>} props.project.categories - Tableau des catégories du projet
+ * @param {string} props.project.due_date - Date d'échéance du projet au format ISO.
+ * @param {number} props.project.completion - Pourcentage de complétion du projet
+ * @param {string} [props.project.guidelines_file_path] - Chemin du fichier de guidelines
+ * @param {string} [props.project.notes] - Notes associées au projet.
+ * 
+ * @example
+ * <ProjectHome projet={project} />
+ * 
+ * @returns {JSX.Element} Un composant affichant la vue complète d'un projet.
+ */
 export default function ProjectHome( {project }) {
     return (
         <div className="container-project-home">
