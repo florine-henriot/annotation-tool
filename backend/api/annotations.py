@@ -6,8 +6,9 @@ from core.security import get_current_user  # ta fonction JWT pour récupérer l
 import shutil
 import os
 import csv
-from charset_normalizer import from_bytes
+from charset_normalizer import from_bytes, from_path
 from datetime import datetime
+from pathlib import Path
 
 router = APIRouter(
     prefix="/annotations",
@@ -90,7 +91,7 @@ async def create_project(
 
     return {"message": "Projet créé avec succès", "project": new_project.id}
 
-@router.get("/{project_id}/annotate")
+
 @router.get("/{project_id}")
 def get_project_details(
     project_id: int,
@@ -123,6 +124,56 @@ def get_project_details(
                 "row_id": a.row_id,
                 "content": a.content,
                 "date": a.date
+            }
+            for a in annotations
+        ]
+    }
+
+@router.get("/{project_id}/annotate")
+def get_project_annotations(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    # Vérifier que le projet existe
+    project = db.query(Project).filter(Project.id == project_id, Project.user_id == current_user.id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Projet non trouvé")
+
+    # Récupérer toutes les annotations associées
+    annotations = db.query(Annotation).filter(Annotation.project_id == project_id).all()
+
+    for a in annotations:
+        print("ROW ID :", a.row_id)
+        print("DB ID :", a.id)
+    # Lecture CSV pour voir le texte
+    bullet_points_texts = {}
+    csv_path = Path(project.annotation_file_path)
+    if csv_path.exists():
+        result = from_path(csv_path).best()
+        if result is None:
+            raise HTTPException(status_code=400, detail="Impossible de détecter l'encodage du fichier CSV")
+        with open(csv_path, newline="", encoding=result.encoding) as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            for idx, row in enumerate(csv_reader):
+                print("ROW CSV :", idx)
+                print("TEXT :", row)
+                bullet_points_texts[idx] = row.get("bullet_point_text", "fail")
+
+    return {
+        "id": project.id,
+        "project_name": project.project_name,
+        "due_date": project.due_date,
+        "notes": project.notes,
+        "guidelines_file_path": project.guidelines_file_path,
+        "categories": project.categories,
+        "annotations": [
+            {
+                "id": a.id,
+                "row_id": a.row_id,
+                "content": a.content,
+                "date": a.date,
+                "text": bullet_points_texts.get(a.row_id, "")
             }
             for a in annotations
         ]

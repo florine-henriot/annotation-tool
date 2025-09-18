@@ -1,0 +1,51 @@
+.container-annotate {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 2 colonnes */
+  grid-template-rows: 100px 460px 100px; /* 3 lignes */
+  gap: 15px;
+  padding: clamp(1rem, 5vw, 1.25rem);
+  margin: 0 auto;
+  min-height: calc(100vh - 70px);
+  width: 90%;
+}
+
+.cell-annotate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: var(--color-text);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  position: relative; /* nécessaire si on veut positionner le subtitle */
+  background-color: var(--color-white);
+}
+
+.cell-title-annotate {
+  display: flex;
+  flex-direction: column;;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: var(--color-white);
+}
+
+.wide-annotate {
+  grid-column: span 2; /* occupe les 2 colonnes */
+}
+
+.project-title {
+    font-size: 24px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.cell-left-merge {
+  grid-column: 1; /* colonne de gauche */
+  grid-row: 2 / 4; /* de la ligne 2 à la ligne 4 (non incluse) */
+}

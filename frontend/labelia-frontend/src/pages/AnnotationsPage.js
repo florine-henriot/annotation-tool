@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import React from "react";
 import axiosClient from "../components/api/axiosClient";
 import LoadingPage from "./LoadingPage";
+import Annotations from "../components/annotations/Annotations";
 
 export default function AnnotationsPage() {
 
@@ -41,6 +42,12 @@ export default function AnnotationsPage() {
         <div className="page">
 
             <Layout icon={File} pageTitle={`Annotations ${project.project_name}`} />
+
+            <div className="container">
+
+                <Annotations project={project}/>
+
+            </div>
 
         </div>
     )

@@ -1,0 +1,51 @@
+.annotations-consult {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* espace entre les deux listes */
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+.annotations-subtitle {
+  font-size: 16px;
+  color: var(--color-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.table-wrapper {
+  max-height: 220px;   /* hauteur max */
+  overflow-y: auto;    /* scroll vertical */
+  border-radius: var(--border-radius);
+}
+
+.annotations-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow-y: auto;
+    font-size: 12px;
+    table-layout: auto;
+}
+
+.annotations-table th,
+.annotations-table td {
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.annotations-table th {
+    background-color: var(--color-hover);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.annotations-table tr:nth-child(even) {
+    background-color: var(--color-secondary);
+}
