@@ -1,6 +1,7 @@
 import React from "react";
 import "./Annotations.css";
 import AnnotationsConsult from "./AnnotationsConsult";
+import Annotate from "./Annotate";
 
 export default function Annotations({ project }) {
   return (
@@ -14,7 +15,7 @@ export default function Annotations({ project }) {
             <AnnotationsConsult projectId={project.id} />
         </div>
         <div className="cell-annotate">
-            Cell for annotations
+            <Annotate projectId={project.id} projectCategories={project.categories}/>
         </div>
         <div className="cell-annotate">
             Action buttons

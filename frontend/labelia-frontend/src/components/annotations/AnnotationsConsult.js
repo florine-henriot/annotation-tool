@@ -48,7 +48,7 @@ export default function AnnotationsConsult({projectId}) {
                 </table>
             </div>
             
-            <div className="annotations-subtitle">Texte avec annotations</div>
+            <div className="annotations-subtitle">Textes avec annotations</div>
             <div className="table-wrapper">
                 <table className="annotations-table">
                     <thead>
