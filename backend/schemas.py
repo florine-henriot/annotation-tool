@@ -2,6 +2,7 @@
 
 from pydantic import BaseModel, EmailStr, field_validator
 import re
+from datetime import datetime
 
 class LoginRequest(BaseModel):
     """
@@ -73,3 +74,8 @@ class SignupRequest(BaseModel):
                 "une majuscule, une minuscule et un caractère spécial."
             )
         return v
+    
+class AnnotationSubmit(BaseModel):
+    annotationId: int
+    category: str
+    date: datetime

@@ -9,6 +9,7 @@ import csv
 from charset_normalizer import from_bytes, from_path
 from datetime import datetime
 from pathlib import Path
+from schemas import AnnotationSubmit
 
 router = APIRouter(
     prefix="/annotations",
@@ -143,9 +144,6 @@ def get_project_annotations(
     # Récupérer toutes les annotations associées
     annotations = db.query(Annotation).filter(Annotation.project_id == project_id).all()
 
-    for a in annotations:
-        print("ROW ID :", a.row_id)
-        print("DB ID :", a.id)
     # Lecture CSV pour voir le texte
     bullet_points_texts = {}
     csv_path = Path(project.annotation_file_path)
@@ -156,8 +154,6 @@ def get_project_annotations(
         with open(csv_path, newline="", encoding=result.encoding) as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for idx, row in enumerate(csv_reader):
-                print("ROW CSV :", idx)
-                print("TEXT :", row)
                 bullet_points_texts[idx] = row.get("bullet_point_text", "fail")
 
     return {
@@ -178,3 +174,30 @@ def get_project_annotations(
             for a in annotations
         ]
     }
+
+
+@router.post("/{project_id}/submit")
+def update_annotations(
+    project_id: int,
+    payload: AnnotationSubmit,
+    db = Depends(get_db),
+    current_user = Depends(get_current_user)
+) :
+    
+    # Vérifier que le projet appartient à l'utilisateur
+    project = db.query(Project).filter(Project.id == project_id, Project.user_id == current_user.id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Projet non trouvé")
+    
+    # Récupérer l'annotation à mettre à jour
+    annotation = db.query(Annotation).filter(Annotation.id == payload.annotationId, Annotation.project_id == project_id).first()
+    if not annotation:
+        raise HTTPException(status_code=404, detail="Annotation non trouvée")
+    
+    annotation.content = payload.category
+    annotation.date = payload.date
+
+    db.commit()
+    db.refresh(annotation)
+
+    return {"message": "Annotation enregistrée", "annotation_id": annotation.id}

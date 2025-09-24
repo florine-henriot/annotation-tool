@@ -61,10 +61,12 @@
 }
 
 .dropdown {
-  position: relative;       /* le menu se cale sous le bouton */
-  display: inline-block;
-  justify-content: center;
-  margin: 0 auto; 
+  position: relative;
+  display: flex;               /* une seule ligne */
+  justify-content: center;     /* centre horizontalement */
+  align-items: center;         /* aligne verticalement */
+  gap: 12px;                   /* <-- l’espace entre le bouton et la sélection */
+  margin: 0 auto;
 }
 
 /* Bouton du menu */
@@ -73,10 +75,11 @@
   background: var(--color-primary);
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
+  max-height: 30px;
 }
 
 .dropdown-btn:hover {
@@ -127,7 +130,6 @@
 
 .annotation-submit {
     max-width: 250px;
-    height: 40px;
     background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
@@ -139,6 +141,7 @@
     transition: background-color 0.3s ease;
     box-sizing: border-box;
     text-transform: uppercase;
+    padding: 5px;
 }
 
 .annotation-submit:hover {
@@ -146,9 +149,8 @@
 }
 
 .selected-category-container {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* espace entre la catégorie et le bouton */
-    justify-content: center; /* centre horizontalement */
-    margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
 }
