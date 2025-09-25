@@ -22,7 +22,15 @@ export default function Annotate({projectId, projectCategories}) {
         const fetchAnnotations = async () => {
             try {
                 const response = await axiosClient.get(`/annotations/${projectId}/annotate`);
-                setAnnotations(response.data.annotations || []);
+                const data = response.data.annotations || [];
+                setAnnotations(data);
+
+                const firstUnannotatedIndex = data.findIndex(a => !a.content);
+                if (firstUnannotatedIndex !== -1) {
+                    setCurrentIndex(firstUnannotatedIndex);
+                } else {
+                    setCurrentIndex(0);
+                }
             } catch (error) {
                 console.error("Erreur lors de la récupération des annotations :", error);
             } finally {
@@ -43,6 +51,13 @@ export default function Annotate({projectId, projectCategories}) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    React.useEffect(() => {
+        if (annotations.length > 0) {
+            const current = annotations[currentIndex];
+            setSelectedCategory(current.content || "");
+        }
+    }, [currentIndex, annotations])
 
     if (loading) return <Loading />;
 
@@ -74,6 +89,18 @@ export default function Annotate({projectId, projectCategories}) {
                 date: new Date().toISOString()
             };
             await axiosClient.post(`/annotations/${projectId}/submit`, payload);
+
+            // Mettre à jour l'état local:
+            setAnnotations(prev => {
+                const newArr = [...prev];
+                newArr[currentIndex] = {
+                    ...newArr[currentIndex],
+                    content: selectedCategory,
+                    date : new Date().toISOString()
+                };
+                return newArr;
+            })
+
             alert("Annotations soumise avec succès");
             nextSentence(); // passe automatiquement à la phrase suivante
         } catch (error) {

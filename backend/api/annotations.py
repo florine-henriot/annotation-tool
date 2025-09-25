@@ -142,7 +142,7 @@ def get_project_annotations(
         raise HTTPException(status_code=404, detail="Projet non trouvé")
 
     # Récupérer toutes les annotations associées
-    annotations = db.query(Annotation).filter(Annotation.project_id == project_id).all()
+    annotations = db.query(Annotation).filter(Annotation.project_id == project_id).order_by(Annotation.row_id.asc()).all()
 
     # Lecture CSV pour voir le texte
     bullet_points_texts = {}
