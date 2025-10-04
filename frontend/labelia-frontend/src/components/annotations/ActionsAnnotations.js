@@ -14,7 +14,7 @@ import "./ActionsAnnotations.css";
  * Affiche trois boutons principaux : 
  * 1. Voir les guidelines : télécharge et ouvre le PDF des guidelines si disponible
  * 2. Consulter les notes : ouvre un popup contenant les notes HTML du projet
- * 3. Annoter : redirige l'utilisateur vers la page d'annotation.
+ * 3. Retour au projet : redirige l'utilisateur vers la page d'accueil du projet.
  * 
  * @component
  * @param {Object} props - Les propriétés du composant.

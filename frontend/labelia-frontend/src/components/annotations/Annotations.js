@@ -6,11 +6,35 @@ import axiosClient from "../api/axiosClient";
 import Loading from "../common/Loading";
 import ActionsButtonsAnnotations from "./ActionsAnnotations";
 
+/**
+ * Annotations
+ * 
+ * Composant principal de la page d'annotation.
+ * 
+ * Ce composant gère : 
+ * - le chargement des phrases à annoter depuis le backend
+ * - l'état des annotations et de leur index
+ * - l'affiche du panneau qui permet de voir la liste des annotations
+ * 
+ * @component
+ * @param {Object} props - Les propriétés du composant
+ * @param {Object} props.project - Le projet sélectionné
+ * @param {number|string} props.project.id - L'identifiant du projet
+ * @param {string} props.project.project_name - le nom du projet
+ * @param {string[]} props.project.categories - Les catégories disponibles pour l'annotation
+ *  
+ * @returns {JSX.Element} Interface de saisie des annotations
+ */
 export default function Annotations({ project }) {
   const [annotations, setAnnotations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0); // ✅ index partagé
+  const [currentIndex, setCurrentIndex] = useState(0); 
 
+  /**
+   * Récupère les annotations du projet depuis le backend à l'initialisation.
+   * - Trie les annotations selon leur row_id pour conserver l'ordrer
+   * - Initialise currentIndex sur la première phrase non annotée
+   */
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
@@ -41,7 +65,7 @@ export default function Annotations({ project }) {
       <div className="cell cell-left-merge">
         <AnnotationsConsult
           annotations={annotations}
-          onSelect={index => setCurrentIndex(index)}   // ✅ callback au clic
+          onSelect={index => setCurrentIndex(index)}   
         />
       </div>
 
@@ -51,7 +75,7 @@ export default function Annotations({ project }) {
           projectCategories={project.categories}
           annotations={annotations}
           setAnnotations={setAnnotations}
-          currentIndex={currentIndex}                 // ✅ index partagé
+          currentIndex={currentIndex}                 
           setCurrentIndex={setCurrentIndex}
         />
       </div>

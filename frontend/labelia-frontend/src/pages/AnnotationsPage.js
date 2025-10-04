@@ -6,8 +6,23 @@ import axiosClient from "../components/api/axiosClient";
 import LoadingPage from "./LoadingPage";
 import Annotations from "../components/annotations/Annotations";
 
+/**
+ * AnnotationsPage
+ * 
+ * Page d'annotation principale d'un projet.
+ * 
+ * Ce composant sert de point d'entrée pour l'interface d'annotation d'un projet. 
+ * Il se charge : 
+ * - de récupérer les données du projet à partir de l'API
+ * - d'afficher un écran de chargement pendant la requête
+ * - de gérer les erreurs éventuelles
+ * - et de rendre le compte principal une fois les annotations prêtes
+ * 
+ * @returns {JSX.Element} L'interface d'annotation complète du projet sélectionné
+ */
 export default function AnnotationsPage() {
 
+    // Récupération du paramètre dynamique d'URL (ex: /projects/3 -> projectId = 3)
     const { projectId } = useParams();
 
     // Etat local pour stocker le projet, le status de chargement et une éventuelle erreur
@@ -15,6 +30,10 @@ export default function AnnotationsPage() {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
+    /**
+     * Effet déclenché lors du montage du composant. Il interroge l'API pour récupérer
+     * les informations du prohjets correspondant à projectId
+     */
     React.useEffect(() => {
         /**
          * Récupère les données du projet via l'API.
