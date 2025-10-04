@@ -4,6 +4,7 @@ import AnnotationsConsult from "./AnnotationsConsult";
 import Annotate from "./Annotate";
 import axiosClient from "../api/axiosClient";
 import Loading from "../common/Loading";
+import ActionsButtonsAnnotations from "./ActionsAnnotations";
 
 export default function Annotations({ project }) {
   const [annotations, setAnnotations] = useState([]);
@@ -55,7 +56,9 @@ export default function Annotations({ project }) {
         />
       </div>
 
-      <div className="cell-annotate">Action buttons</div>
+      <div className="cell-annotate">
+          <ActionsButtonsAnnotations project={project} />
+      </div>
 
     </div>
   );
