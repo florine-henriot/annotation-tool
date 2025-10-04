@@ -21,6 +21,8 @@ import Protection from '../components/protected_page/Protection';
  * @returns {JSX.Element} Le contenu protégé si authentifié, si non la page de protection.
  */
 
+let sessionTimerStarted = false;
+
 export default function RequireAuth ( { children }) {
     const [authenticated, setAuthenticated] = React.useState(false);
 
@@ -32,6 +34,16 @@ export default function RequireAuth ( { children }) {
         .then(res => {
             console.log("Donnée protégées :", res.data);
             setAuthenticated(true);
+
+            // Lance le compte à rebours 
+            if (!sessionTimerStarted) {
+                sessionTimerStarted = true;
+
+                setTimeout(() => {
+                    // Au bout de 55 minutes, on supprime le token
+                    setAuthenticated(false);
+                }, 55 * 60 * 1000);
+            }
         })
         .catch(err => {
             console.error("Erreur accès protégé : ", err.response?.data || err.message);

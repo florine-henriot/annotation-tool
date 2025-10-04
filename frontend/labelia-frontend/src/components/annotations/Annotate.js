@@ -2,33 +2,29 @@ import React from "react";
 import "./Annotate.css";
 import axiosClient from "../api/axiosClient";
 
-export default function Annotate({ projectId, projectCategories, annotations, setAnnotations }) {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+export default function Annotate({
+  projectId,
+  projectCategories,
+  annotations,
+  setAnnotations,
+  currentIndex,
+  setCurrentIndex        // ✅ vient du parent
+}) {
   const [open, setOpen] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const dropdownRef = React.useRef(null);
 
-  // Initialiser currentIndex sur la première annotation non remplie
-  React.useEffect(() => {
-    if (annotations.length > 0) {
-      const firstUnannotatedIndex = annotations.findIndex(a => !a.content);
-      setCurrentIndex(firstUnannotatedIndex !== -1 ? firstUnannotatedIndex : 0);
-    }
-  }, [annotations]);
-
   React.useEffect(() => {
     if (annotations.length > 0) {
       const current = annotations[currentIndex];
-      setSelectedCategory(current.content || "");
+      setSelectedCategory(current?.content || "");
     }
   }, [currentIndex, annotations]);
 
   const toggleDropdown = () => setOpen(!open);
-
   const nextSentence = () => {
     if (currentIndex < annotations.length - 1) setCurrentIndex(currentIndex + 1);
   };
-
   const prevSentence = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
@@ -44,7 +40,6 @@ export default function Annotate({ projectId, projectCategories, annotations, se
       };
       await axiosClient.post(`/annotations/${projectId}/submit`, payload);
 
-      // Mettre à jour le state partagé
       setAnnotations(prev => {
         const newArr = [...prev];
         newArr[currentIndex] = {

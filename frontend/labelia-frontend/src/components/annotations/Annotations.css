@@ -19,6 +19,7 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   position: relative; /* nécessaire si on veut positionner le subtitle */
   background-color: var(--color-white);
+  justify-content: center;
 }
 
 .cell-title-annotate {
