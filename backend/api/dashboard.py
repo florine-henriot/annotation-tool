@@ -30,6 +30,11 @@ def get_user_projects(current_user : User = Depends(get_current_user), db: Sessi
         if total_rows > 0:
             completion = round((annotated_rows / total_rows) * 100)
 
+        if completion == 100 and project.status == "pending":
+            project.status = "completed"
+            db.commit()
+            db.refresh(project)
+
         project_list.append({
             "id": project.id,
             "project_name": project.project_name,

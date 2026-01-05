@@ -114,7 +114,7 @@ export default function Annotate({
     }
   };
 
-  const currentSentence = annotations[currentIndex]?.text || "Aucune phrase à annoter";
+  const currentSentence = annotations[currentIndex]?.text ;
 
   return (
     <div className="annotate-container">

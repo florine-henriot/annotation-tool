@@ -80,6 +80,9 @@ async def create_project(
     reader = csv.reader(lines)
 
     for row_id, row in enumerate(reader):
+        print(row_id, row)
+        if row_id==0:
+            continue
         annotation = Annotation(
             row_id = row_id,
             project_id = new_project.id,
@@ -153,8 +156,11 @@ def get_project_annotations(
             raise HTTPException(status_code=400, detail="Impossible de détecter l'encodage du fichier CSV")
         with open(csv_path, newline="", encoding=result.encoding) as csv_file:
             csv_reader = csv.DictReader(csv_file)
+            print(csv_reader)
             for idx, row in enumerate(csv_reader):
-                bullet_points_texts[idx] = row.get("bullet_point_text", "fail")
+                # idx+1 to skip header and make database and file corresponds
+                bullet_points_texts[idx+1] = row.get("bullet_point_text", "fail")
+    print(bullet_points_texts)
 
     return {
         "id": project.id,
