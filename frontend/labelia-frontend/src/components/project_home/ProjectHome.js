@@ -1,3 +1,5 @@
+import React from 'react';
+
 import "./ProjectHome.css";
 
 import CompletionCard from "./CompletionBarCard";
@@ -6,6 +8,8 @@ import CalendarTracker from "./Calendar";
 import DueDate from "./DueDate";
 import MeanAnnotations from "./MeanAnnotations";
 import ActionsButtons from "./Actions";
+
+import { CircleQuestionMark } from "lucide-react";
 
 /**
  * ProjectHome
@@ -37,6 +41,9 @@ import ActionsButtons from "./Actions";
  * @returns {JSX.Element} Un composant affichant la vue complète d'un projet.
  */
 export default function ProjectHome( {project }) {
+
+    const [showTooltip, setShowTooltip] = React.useState(false);
+
     return (
         <div className="container-project-home">
 
@@ -80,6 +87,17 @@ export default function ProjectHome( {project }) {
                     </h2>
                     <div className="cell-content">
                         <MeanAnnotations project={project} />
+                        <button 
+                        className='hover-button'
+                        onMouseEnter={() => setShowTooltip(true)}
+                        onMouseLeave={() => setShowTooltip(false)}>
+                            <CircleQuestionMark />
+                        </button>
+                        {showTooltip && <span className='tooltip-info-annotations'>
+                            Le nombre d'annotations est calculé dynamiquement jusqu'à ce que 
+                            le projet soit marqué comme terminé. Une fois terminé, le nombre ne 
+                            changera plus pour en garder la trace.
+                        </span>}
                     </div>
                 </div>
             </div>
