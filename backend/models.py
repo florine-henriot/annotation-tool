@@ -31,6 +31,7 @@ class Project(Base):
     created_at = Column(TIMESTAMP, server_default = "CURRENT_TIMESTAMP")
     status = Column(String, default="pending")
     categories = Column(JSON, nullable=False)
+    mean_annotations = Column(Integer, nullable=True)
 
     user = relationship("User", back_populates="projects") # Crée une relation ORM entre le projet et l'utilisateur
     annotations = relationship("Annotation", back_populates="project", cascade="all, delete-orphan")

@@ -114,6 +114,21 @@ def get_project_details(
     done = sum(1 for a in annotations if a.content is not None)
     completion = round((done / total * 100), 2) if total > 0 else 0
 
+    if project.status == "completed" and not project.mean_annotations:
+        total_annotations = sum(1 for a in annotations if getattr(a, "content", None))
+        annotated_dates = [a.date for a in annotations if getattr(a, "date", None)]
+        if annotated_dates:
+            first_date = min(annotated_dates)
+        else:
+            first_date = datetime.utcnow()
+        days_elapsed = max(
+            (datetime.utcnow() - first_date).total_seconds() / 86400,
+            1
+        )
+        project.mean_annotations = round(total_annotations / days_elapsed)
+        db.commit()
+        db.refresh(project)
+
     return {
         "id": project.id,
         "project_name": project.project_name,
@@ -122,6 +137,8 @@ def get_project_details(
         "guidelines_file_path": project.guidelines_file_path,
         "categories": project.categories,
         "completion": completion,
+        "status": project.status,
+        "mean_annotations": project.mean_annotations,
         "annotations": [
             {
                 "id": a.id,
@@ -132,6 +149,7 @@ def get_project_details(
             for a in annotations
         ]
     }
+
 
 @router.get("/{project_id}/annotate")
 def get_project_annotations(

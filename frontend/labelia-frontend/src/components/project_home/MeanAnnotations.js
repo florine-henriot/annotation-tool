@@ -15,24 +15,35 @@ import './MeanAnnotations.css';
  * @param {Array<Object>} props.project.annotations - Tableau des annotations du projet
  * @param {string} [props.project.annotations[].content] - Contenu de l'annotations
  * @param {string} [props.project.annotations[].date] - Date de l'annotation au format ISO
+ * @param {string} [props.project.status] - Le status du projet (terminé ou en cours)
  * 
  * @example
  * <MeanAnnotations project={project} />
  * 
  * @returns {JSX.Element} Un composant affichant le nombre moyen d'annotations par jour.
  */
+
+function computeMeanAnnotations(annotations) {
+    const totalAnnotations = annotations.filter(a => a.content).length;
+    const annotatedDates = annotations
+        .filter(a => a.date)
+        .map(a => new Date(a.date));
+    const firstDate = annotatedDates.length ? new Date(Math.min(...annotatedDates)) : new Date();
+    const daysElapsed = Math.max((new Date() - firstDate) / (1000 * 60 * 60 * 24), 1);
+    return Math.round(totalAnnotations / daysElapsed);
+}
+
 export default function MeanAnnotations({ project }) {
+    let meanAnnotations;
+
+    if (project.status === "pending") {
+        meanAnnotations = computeMeanAnnotations(project.annotations);
+    } else {
+        meanAnnotations = project.mean_annotations;
+    }
     return (
         <p className='mean-annotations'>
-            {(() => {
-                const totalAnnotations = project.annotations.filter(a => a.content).length;
-                const annotatedDates = project.annotations
-                    .filter(a => a.date)
-                    .map(a => new Date(a.date));
-                const firstDate = annotatedDates.length ? new Date(Math.min(...annotatedDates)) : new Date();
-                const daysElapsed = Math.max((new Date() - firstDate) / (1000 * 60 * 60 * 24), 1);
-                return Math.round(totalAnnotations / daysElapsed);
-            })()}
+            {meanAnnotations}
         </p>
-    )
+    );
 }
