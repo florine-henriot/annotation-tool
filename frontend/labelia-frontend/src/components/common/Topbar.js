@@ -74,12 +74,12 @@ export default function TopBar( { icon: Icon, pageTitle }) {
 
             <div className="right-element">
 
-                <span>
+                {/* <span>
                     <NavLink to="/account" className="account-button">
                         <User size={18} style={{marginRight: "5px"}} />
                         Mon compte
                     </NavLink>
-                </span>
+                </span> */}
 
                 <span>
                     <button type="submit" 

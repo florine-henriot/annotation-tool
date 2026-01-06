@@ -78,11 +78,11 @@ export default function Sidebar({ isOpen, onClose }) {
           <span>Ajouter</span>
         </NavLink>
 
-        {/* Lien vers l'équipe */}
+        {/* Lien vers l'équipe
         <NavLink to="/team" className={({isActive}) => isActive ? "nav-button active": "nav-button"}>
           <span><Users size={18} /></span>
           <span>Mon équipe</span>
-        </NavLink>
+        </NavLink> */}
 
         {/* Lien vers l'exportation */}
         <NavLink to="/export" className={({isActive}) => isActive ? "nav-button active": "nav-button"}>
