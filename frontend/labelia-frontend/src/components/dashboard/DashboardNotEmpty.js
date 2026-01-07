@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import "./Dashboard.css";
-import { FilePlus, Trash2 } from 'lucide-react';
+import { FilePlus, Trash2, Download } from 'lucide-react';
 import axiosClient from "../api/axiosClient";
 import { NavLink, useNavigate } from "react-router-dom";
 import Popup from "../common/Popup";
@@ -24,6 +24,7 @@ import Popup from "../common/Popup";
  */
 
 export default function DashboardNotEmpty() {
+    const [showTooltip, setShowTooltip] = React.useState(false);
     // Liste des projets récupérés
     const [projects, setProjects] = React.useState([]);
     // Projet sélectionné pour suppression
@@ -58,6 +59,30 @@ export default function DashboardNotEmpty() {
             default: return "#9CA3AF"; // gris clair
         }
     };
+
+    /**
+     * Télécharger le fichier d'annotation du projet avec les annotations de la base 
+     * de données ajoutées au fichier CSV.
+     */
+    const handleExport = async (project) => {
+        try {
+            const response = await axiosClient.get(`/dashboard/annotations/${project.id}/export`, {
+                responseType: 'blob',
+            });
+
+            // Créer un lien de téléchargement temporaire
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+
+            link.setAttribute('download', `projet_${project.id}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (err) {
+            console.error("Erreur lors de l'export :", err.response?.data || err.message);
+        }
+    }
 
     /**
      * Supprime définitivement un projet via l'API puis met à jour la list localement.
@@ -114,6 +139,17 @@ export default function DashboardNotEmpty() {
                                 </td>
 
                                 <td>
+                                    <div className="tooltip-wrapper">
+                                        <button className="export-btn"
+                                            onClick={(e) => {e.stopPropagation(); handleExport(project);}}
+                                            onMouseEnter={() => setShowTooltip(true)}
+                                            onMouseLeave={() => setShowTooltip(false)}>
+                                                <Download size={18} />
+                                        </button>
+                                        <span className="tooltip-info">
+                                            Exporter les annotations
+                                        </span>
+                                    </div>
                                     <button
                                         className="delete-btn"
                                         onClick={(e) => {e.stopPropagation(); setProjectToDelete(project);}}>
@@ -129,6 +165,10 @@ export default function DashboardNotEmpty() {
             ) : (
                 <span></span>
             )}
+
+            {/* {showTooltip && <span className="tooltip-info">
+                Exporter les annotations
+            </span>} */}
 
             <NavLink to="/annotations/create" className="add-project-button">
 

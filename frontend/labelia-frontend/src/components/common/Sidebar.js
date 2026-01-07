@@ -84,11 +84,11 @@ export default function Sidebar({ isOpen, onClose }) {
           <span>Mon équipe</span>
         </NavLink> */}
 
-        {/* Lien vers l'exportation */}
+        {/* Lien vers l'exportation
         <NavLink to="/export" className={({isActive}) => isActive ? "nav-button active": "nav-button"}>
           <span><Download size={18} /></span>
           <span>Exporter</span> 
-        </NavLink>
+        </NavLink> */}
       </div>
     </>
   )
