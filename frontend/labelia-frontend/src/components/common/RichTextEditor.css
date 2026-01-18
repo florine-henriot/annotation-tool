@@ -60,7 +60,7 @@
 }
 
 .tiptap-editor {
-  width: 1000px;          /* largeur fixe souhaitée */
+  width: 1000px;          /* largeur fixe */
   max-width: 100%;        /* responsive si l’écran < 1000px */
   box-sizing: border-box; 
   border: 2px solid #E5E7EB;

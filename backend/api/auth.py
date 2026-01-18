@@ -119,5 +119,14 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
 
 @router.post("/logout")
 def logout(response: Response):
+    """Déconnecte l'utilisateur en suppriment le cookie d'authentification
+
+    Args:
+        response (Response): objet response fastapi pour modifier les en-têtes http et supprimer le cookie
+        d'authentification
+
+    Returns:
+        dict: message de confirmation
+    """    
     response.delete_cookie(key="access_token", path="/")
     return {"success": True, "message": "Vous avez été déconnecté"}

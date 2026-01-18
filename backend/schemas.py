@@ -76,6 +76,14 @@ class SignupRequest(BaseModel):
         return v
     
 class AnnotationSubmit(BaseModel):
+    """Modèle Pydantic représentant la structure des données envoyées par le fontend
+    lors de la soumission d'une annotation.
+
+    Attributs:
+        annotationID (int) : identifiant de l'annotation à mettre à jour
+        category (str) : valeur de l'annotation sélectionnée par l'utilisateur
+        date (datetime) : date et heure de validation de l'annotation
+    """    
     annotationId: int
     category: str
     date: datetime

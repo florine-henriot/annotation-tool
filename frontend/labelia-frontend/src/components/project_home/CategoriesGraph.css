@@ -10,8 +10,8 @@
 
 .chart-and-legend {
   display: flex;
-  align-items: center;  /* ⚡ centre verticalement */
-  justify-content: center; /* facultatif si tu veux centrer le bloc entier */
+  align-items: center;  
+  justify-content: center; /* centrer le bloc entier */
   gap: 20px;
 }
 
