@@ -11,7 +11,7 @@ C'est une petite application permettant de créer des projets d'annotation, de c
 - Suivi du taux de complétion des projets
 - Export des annotations en CSV
 - Authentification des utilisateurs avec JWT
-- Supression de projets et noettoyage des fichiers associés
+- Supression de projets et nettoyage des fichiers associés
 
 > Note : ce n'est pas un véritable outil professionnel, juste un petit projet perso 😄
 
