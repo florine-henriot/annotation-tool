@@ -111,10 +111,13 @@ export default function LoginForm() {
                 {/* Message d'information ou d'erreur */}
                 {message && <p className='login-message'>{message}</p>}
 
-                <span className='message'>Pas encore inscrit ?</span>
+                <button className="forgotten-password">Mot de passe oublié ?</button>
+
 
             </form>
 
+
+            <span className='message'>Pas encore inscrit ?</span>
             
             <ButtonRedirect
                 className=""
